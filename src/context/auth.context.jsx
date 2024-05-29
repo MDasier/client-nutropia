@@ -1,0 +1,96 @@
+import { createContext, useEffect, useState } from "react";
+import service from "../services/config.services";
+import { Spinner } from "react-bootstrap/esm";
+
+const AuthContext = createContext()
+
+function AuthWrapper(props) {
+ 
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+  const [ loggedUserId, setLoggedUserId ] = useState(null)
+  const [ isAuthenticating, setIsAuthenticating ] = useState(true)
+
+  //Roles
+  const [ isAdmin, setIsAdmin] = useState(false)
+  const [ isNutri, setIsNutri] = useState(false)
+  const [ isPaciente, setIsPaciente] = useState(false)
+
+  const authenticateUser = async () => {
+    const authToken = localStorage.getItem("authToken")
+
+    if (!authToken) {
+      setIsLoggedIn(false)
+      setLoggedUserId(null)
+      setIsAuthenticating(false)
+      setIsAdmin(false)
+      setIsNutri(false)
+      setIsPaciente(false)
+      return;
+    }
+
+    try {
+      const response = await service.get("/auth/verify")
+      setIsLoggedIn(true)
+      setLoggedUserId(response.data.payload._id)
+      setIsAuthenticating(false)
+
+      if (response.data.payload.role === "admin") {
+        setIsAdmin(true)
+      } else {
+        setIsAdmin(false)
+      }
+      if (response.data.payload.role === "nutri") {
+        setIsNutri(true)
+      } else {
+        setIsNutri(false)
+      }
+      if (response.data.payload.role === "paciente") {
+        setIsPaciente(true)
+      } else {
+        setIsPaciente(false)
+      }
+
+    } catch (error) {
+      setIsLoggedIn(false)
+      setLoggedUserId(null)
+      setIsAuthenticating(false)
+      setIsAdmin(false)
+      setIsNutri(false)
+      setIsPaciente(false)
+    }
+  }
+  
+  const passedContext = {
+    isLoggedIn,
+    loggedUserId,
+    authenticateUser,
+    isNutri,
+    isAdmin
+  }
+
+  useEffect(() => {
+    authenticateUser()
+  }, [])
+
+  if (isAuthenticating === true) {
+    return (
+      <>
+      <Spinner animation="grow" variant="warning" />
+      <Spinner animation="grow" variant="warning" />
+      <Spinner animation="grow" variant="warning" />
+      </>
+    );
+  }
+
+  return (
+    <AuthContext.Provider value={passedContext}>
+      {props.children}
+    </AuthContext.Provider>
+  )
+
+}
+
+export {
+  AuthContext,
+  AuthWrapper
+}
