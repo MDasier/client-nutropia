@@ -8,13 +8,14 @@ import defaulUserImg from '../assets/images/defaultUser.png'
 
 function MainNavbar() {
 
-  const { authenticateUser, isLoggedIn, isAdmin, isDarkTheme } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, loggedUserName, setLoggedUserName, loggedUserImage, isAdmin, isDarkTheme } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
   const handleLogout = async () => {
     setExpanded(!expanded)
     localStorage.removeItem("authToken")
+    setLoggedUserName(null)
     await authenticateUser()
     navigate("/login")
 
@@ -45,9 +46,9 @@ function MainNavbar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>Home</Nav.Link>
-          <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>Link</Nav.Link>
+          <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>INFO</Nav.Link>
           {isLoggedIn === true && <>
-            <Nav.Link as={Link} to="/perfil" onClick={() => setExpanded(!expanded)}> Perfil </Nav.Link>
+            {/*<Nav.Link as={Link} to={`/perfil/${loggedUserId}`} onClick={() => setExpanded(!expanded)}> Perfil </Nav.Link>*/}
             <Nav.Link onClick={handleLogout}> Cerrar sesión </Nav.Link>
           </>}
           {isLoggedIn === false && <>
@@ -55,10 +56,12 @@ function MainNavbar() {
             <Nav.Link as={Link} to="/login" onClick={() => setExpanded(!expanded)}> Acceso </Nav.Link>
           </>}
         </Nav>
-        <Nav.Link as={Link} to="/perfil" onClick={() => setExpanded(!expanded)}> <img src={defaulUserImg} alt="user" width={"30px"}/> </Nav.Link>
+        {isLoggedIn === true && <><Nav.Link as={Link} to={`/perfil/${loggedUserId}`} onClick={() => setExpanded(!expanded)}> <img src={loggedUserImage?loggedUserImage:defaulUserImg} alt="user" width={"30px"}/> </Nav.Link></>}
+        
       </Navbar.Collapse>
     </Container>
   </Navbar>
+  
  );
 }
 

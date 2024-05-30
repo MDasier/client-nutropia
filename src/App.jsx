@@ -7,8 +7,9 @@ import Login from "./pages/auth/Login.jsx"
 import Signup from "./pages/auth/Signup.jsx"
 // components
 import MainNavbar from "./components/MainNavbar.jsx"
-import Error404 from './pages/Error404.jsx'
+import NotFound from './pages/NotFound.jsx'
 import Perfil from './pages/auth/Perfil.jsx'
+import Editimage from './pages/auth/Editimage.jsx';
 
 function App() {
 
@@ -20,9 +21,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/perfil" element={<Perfil/>} />
-        <Route path="/404" element={<Error404 />} />
-        <Route path="*" element={<Error404 />} />
+        <Route path="/perfil/:userId" element={<Perfil/>} />
+        <Route path="/perfil/foto-perfil/:userId" element={<Editimage/>} />
+        {/*<Route path="/error" element={/*CONTROL ERRORES INTERNOS} />*/}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )

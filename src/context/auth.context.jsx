@@ -7,8 +7,12 @@ const AuthContext = createContext()
 function AuthWrapper(props) {
  
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-  const [ loggedUserId, setLoggedUserId ] = useState(null)
   const [ isAuthenticating, setIsAuthenticating ] = useState(true)
+
+  //Datos
+  const [ loggedUserId, setLoggedUserId ] = useState(null)
+  const [ loggedUserImage, setLoggedUserImage ] = useState(null)
+  const [ loggedUserName, setLoggedUserName ] = useState(null)
 
   //Roles
   const [ isAdmin, setIsAdmin] = useState(false)
@@ -32,6 +36,9 @@ function AuthWrapper(props) {
       const response = await service.get("/auth/verify")
       setIsLoggedIn(true)
       setLoggedUserId(response.data.payload._id)
+      //console.log(response.data.payload)//DATOS USUARIO
+      setLoggedUserImage(response.data.payload.imageUrl)
+      setLoggedUserName(response.data.payload.username)
       setIsAuthenticating(false)
 
       if (response.data.payload.role === "admin") {
@@ -63,8 +70,12 @@ function AuthWrapper(props) {
   const passedContext = {
     isLoggedIn,
     loggedUserId,
+    loggedUserImage,
+    loggedUserName,
+    setLoggedUserName,
     authenticateUser,
     isNutri,
+    isPaciente,
     isAdmin
   }
 

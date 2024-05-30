@@ -4,7 +4,6 @@ import { AuthContext } from "../../context/auth.context.jsx"
 import service from "../../services/config.services";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 
 function Signup() {
 
@@ -33,7 +32,6 @@ function Signup() {
       navigate("/login")
 
     } catch (error) {
-      console.log(error)
       if(error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage)
       }
