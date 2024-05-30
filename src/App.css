@@ -6,3 +6,13 @@
   /*scrollbar-width: "none";
   overflow-y: "scroll";*/
 }
+.darkTheme{
+  background-color: #303030;
+  color:#f3f3f3;
+  transition: all 0.4s;
+}
+.lightTheme{
+  background-color: #f3f3f3;
+  transition: all 0.8s;
+  color:#303030;
+}

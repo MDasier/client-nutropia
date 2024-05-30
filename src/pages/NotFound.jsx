@@ -5,11 +5,14 @@ import Button from "react-bootstrap/Button";
 
 function NotFound() {
   return (
-    <div style={{margin:"70px"}}>
-      <img src={notFoundImg} alt="not found" width="100%" />
+    <div>
+      <h6>Hemos perdido la página que buscas 😔, lo sentimos!</h6>
+      
       <Link to="/">
-        <Button variant="primary">Volver</Button>
+        <Button variant="primary">Volver al inicio</Button>
       </Link>
+
+      <img src={notFoundImg} alt="not found" width="100%" />
     </div>
   )
 }

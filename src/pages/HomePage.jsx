@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import ListaPacientes from "./ListaPacientes";
 
 function HomePage() {
 
@@ -27,12 +28,33 @@ function HomePage() {
       {isNutri
       ?<div>
         <h3>Contenido para los nutricionistas</h3>
+        <div>PROXIMA CITA || AGENDA</div>
+        <div>CREAR PLAN NUTRICIONAL</div>
+        <div>
+          <h6>LISTA DE PACIENTES:</h6>
+          <ListaPacientes />
+        </div>
       </div>
       :null}
 
       {isPaciente
       ?<div>
         <h3>Contenido para los pacientes</h3>
+        <div>
+          <h6>PROXIMA CITA</h6>
+        </div>
+
+        <div>
+          <h6>PLANES NUTRICIONALES</h6>
+        </div>
+
+        <div>
+          <h6>RECETAS SALUDABLES:</h6>
+          <a href="https://leftnutrition.netlify.app" target="_blank" rel="noopener noreferrer">
+            <span>🥕 RECETAS DE MARINA 🥕</span>
+          </a>
+        </div>
+
       </div>
       :null}
 
