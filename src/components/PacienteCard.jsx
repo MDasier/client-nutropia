@@ -9,7 +9,7 @@ function PacienteCard(props) {
     const { authenticateUser, isLoggedIn, loggedUserId, loggedUserName, setLoggedUserName, loggedUserImage, isAdmin, isDarkTheme } = useContext(AuthContext)
 
   return (
-    <Card style={{ width: "fit-content", minWidth:"fit-content", height: "fit-content" }}
+    <Card style={{ width: "100%", minWidth:"fit-content", height: "fit-content" }}
       data-bs-theme={isDarkTheme?"dark":"light"}
     >
       <Card.Body
@@ -20,15 +20,17 @@ function PacienteCard(props) {
           gap: "8px",
           scrollbarWidth:"none",
           overflowY:"scroll",
-          /*maxHeight:"fit-content",*/
+          maxHeight:"fit-content",
           backgroundColor:"#dcdcdc"
         }}
       >
-        <Link to={`/pacientes/${props.paciente._id}`}><Card.Img variant="top" src={props.paciente.imageUrl} height="120rem" style={{objectFit:"cover"}} /></Link>
+        <Link to={`/pacientes/${props.paciente._id}`}><Card.Img variant="top" src={props.paciente.imageUrl} width="10rem" style={{objectFit:"cover"}} /></Link>
         <Card.Title>{props.paciente.username}</Card.Title>
+
         <Link to={`/pacientes/${props.paciente._id}`}>
           <Button variant="primary">Detalles</Button>
         </Link>
+        
       </Card.Body>
     </Card>
   )

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 function NotFound() {
   return (
     <div>
-      <h6>Hemos perdido la página que buscas 😔, lo sentimos!</h6>
+      <h6>Hemos perdido la página que buscas 😨, lo sentimos!</h6>
       
       <Link to="/">
         <Button variant="primary">Volver al inicio</Button>

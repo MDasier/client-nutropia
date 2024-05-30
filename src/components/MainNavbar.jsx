@@ -32,7 +32,7 @@ function MainNavbar() {
 
           <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>Home</Nav.Link>
 
-          <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>INFO</Nav.Link>
+          <Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link>
           
           {isLoggedIn === false && <>
           <Nav.Link as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> Registro </Nav.Link>

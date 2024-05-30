@@ -39,7 +39,7 @@ function Perfil() {
     }
 
     try {
-      await service.patch(`/auth/perfil/${loggedUserId}`, perfilEditado)
+      await service.patch(`/perfil/${loggedUserId}`, perfilEditado)
       navigate("/")
     } catch (error) {
       navigate("/error");
@@ -49,7 +49,7 @@ function Perfil() {
 
   useEffect(() => {
 
-    service.get(`/auth/perfil/${loggedUserId}`)
+    service.get(`/perfil/${loggedUserId}`)
 
     .then((response) => {
       //console.log(response.data)
@@ -92,7 +92,7 @@ function Perfil() {
 
   
       <Form.Group controlId="email" className="mb-3">
-        <Form.Label>Email</Form.Label>
+        <Form.Label>Contacta con tu nutricionista o un administrador para cambiar el email</Form.Label>
         <Form.Control
           type="email"
           name="email"
@@ -103,7 +103,7 @@ function Perfil() {
         />
       </Form.Group>
       <Form.Group controlId="username" className="mb-3">
-        <Form.Label>Nombre de usuario</Form.Label>
+        <Form.Label>Cambiar nombre de usuario:</Form.Label>
         <Form.Control
           type="text"
           name="username"
@@ -112,6 +112,7 @@ function Perfil() {
           onChange={handleUsernameChange}
         />
       </Form.Group>
+      {/*}
       <Form.Group controlId="password" className="mb-3">
         <Form.Label>Contraseña</Form.Label>
         <Form.Control
@@ -122,7 +123,7 @@ function Perfil() {
           placeholder="Escribe una contraseña"
           onChange={handlePasswordChange}
         />
-      </Form.Group>
+    </Form.Group>*/}
 
       <Button onClick={handleShow}> Guardar cambios </Button>
       <Button as={Link} to={`/perfil/foto-perfil/${loggedUserId}`}> Cambiar foto de perfil </Button>

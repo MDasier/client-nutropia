@@ -3,15 +3,15 @@ import service from "../services/config.services";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { Spinner } from "react-bootstrap/esm";
-import PacienteCard from "../components/PacienteCard";
+import PacienteCard from "./PacienteCard";
 
 function ListaPacientes() {
   const { authenticateUser, isLoggedIn, loggedUserId, loggedUserName, setLoggedUserName, loggedUserImage, isAdmin, isDarkTheme } = useContext(AuthContext)
-  const [listaPacientes, setListaPacientes] = useState([]);
+  const [listaPacientes, setListaPacientes] = useState(null);
   const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchPacientes = async () => {
+    const cargaPacientes = async () => {
       try {
         const response = await service.get("/auth/pacientes");
         setListaPacientes(response.data);
@@ -20,14 +20,12 @@ function ListaPacientes() {
       }
     };
   
-    fetchPacientes();
+    cargaPacientes();
   }, []);
 
   if (listaPacientes === null) {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <Spinner animation="border" role="status"></Spinner>
     );
   }
 

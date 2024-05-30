@@ -5,11 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage.jsx'
 import Login from "./pages/auth/Login.jsx"
 import Signup from "./pages/auth/Signup.jsx"
-// components
-import MainNavbar from "./components/MainNavbar.jsx"
-import NotFound from './pages/NotFound.jsx'
+import Controlusuarios from './pages/Controlusuarios.jsx';
 import Perfil from './pages/auth/Perfil.jsx'
 import Editimage from './pages/auth/Editimage.jsx';
+import NotFound from './pages/NotFound.jsx'
+// components
+import MainNavbar from "./components/MainNavbar.jsx"
+
+
+
 
 function App() {
 
@@ -23,7 +27,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/perfil/:userId" element={<Perfil/>} />
         <Route path="/perfil/foto-perfil/:userId" element={<Editimage/>} />
-        {/*<Route path="/error" element={/*CONTROL ERRORES INTERNOS} />*/}
+        <Route path="/control-usuarios" element={<Controlusuarios/>} />
+        <Route path="/error" element={<NotFound />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
