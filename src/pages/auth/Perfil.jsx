@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import service from "../../services/config.services"
+import service from "../../services/config.services.js"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../context/auth.context.jsx"
 import Button from "react-bootstrap/Button";
@@ -16,14 +16,9 @@ function Perfil() {
   const [ email, setEmail ] = useState("")
   const [ username, setUsername ] = useState("")
   const [ password, setPassword ] = useState("")
-/*
-  const [ imageUrl, setImageUrl ] = useState(null); 
-  const [ isUploading, setIsUploading ] = useState(false);
-*/
-  const { authenticateUser, isLoggedIn, loggedUserId, isAdmin, isDarkTheme } = useContext(AuthContext)
+  const { loggedUserId, isDarkTheme } = useContext(AuthContext)
 
   const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleUsernameChange = (e) => setUsername(e.target.value);
 
   // control del modal
@@ -40,7 +35,7 @@ function Perfil() {
 
     try {
       await service.patch(`/perfil/${loggedUserId}`, perfilEditado)
-      navigate("/")
+      navigate("/home")
     } catch (error) {
       navigate("/error");
     }
@@ -69,7 +64,7 @@ function Perfil() {
       setPassword(passwordCopy.slice(1,passwordCopy.length-1))
     })
     .catch((err) => {
-      navigate("/error")
+      navigate("/server-error")
     })
 
   }, [])
@@ -112,18 +107,6 @@ function Perfil() {
           onChange={handleUsernameChange}
         />
       </Form.Group>
-      {/*}
-      <Form.Group controlId="password" className="mb-3">
-        <Form.Label>Contraseña</Form.Label>
-        <Form.Control
-          type="password"
-          name="password"
-          value={password}
-          disabled
-          placeholder="Escribe una contraseña"
-          onChange={handlePasswordChange}
-        />
-    </Form.Group>*/}
 
       <Button onClick={handleShow}> Guardar cambios </Button>
       <Button as={Link} to={`/perfil/foto-perfil/${loggedUserId}`}> Cambiar foto de perfil </Button>

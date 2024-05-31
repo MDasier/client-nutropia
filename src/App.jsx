@@ -11,7 +11,8 @@ import Editimage from './pages/auth/Editimage.jsx';
 import NotFound from './pages/NotFound.jsx'
 // components
 import MainNavbar from "./components/MainNavbar.jsx"
-
+import PrivateContent from './components/PrivateContent.jsx';
+import PublicHomePage from './pages/PublicHomePage.jsx';
 
 
 
@@ -22,12 +23,13 @@ function App() {
       <MainNavbar />
       <br />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<PublicHomePage />} />
+        <Route path="/home" element={<PrivateContent><HomePage /></PrivateContent>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/perfil/:userId" element={<Perfil/>} />
-        <Route path="/perfil/foto-perfil/:userId" element={<Editimage/>} />
-        <Route path="/control-usuarios" element={<Controlusuarios/>} />
+        <Route path="/perfil/:userId" element={<PrivateContent><Perfil/></PrivateContent>} />
+        <Route path="/perfil/foto-perfil/:userId" element={<PrivateContent><Editimage/></PrivateContent>} />
+        <Route path="/control-usuarios" element={<PrivateContent><Controlusuarios/></PrivateContent>} />
         <Route path="/error" element={<NotFound />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>

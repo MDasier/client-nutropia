@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import service from "../../services/config.services";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { Spinner } from "react-bootstrap/esm";
 
 function Login() {
 
-  const { authenticateUser, isLoggedIn, isAdmin, isDarkTheme } = useContext(AuthContext)
+  const { authenticateUser, isDarkTheme } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const [email, setEmail] = useState("");
@@ -35,7 +33,6 @@ function Login() {
       navigate("/")
 
     } catch (error) {
-      console.log(error)
       if(error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage)
       }

@@ -1,95 +1,88 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 import service from "../services/config.services";
+import { CardText } from "react-bootstrap";
 
 function UsuarioCard(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
-    authenticateUser,
     isLoggedIn,
-    loggedUserId,
-    loggedUserName,
-    setLoggedUserName,
-    loggedUserImage,
-    isAdmin,
     isDarkTheme,
   } = useContext(AuthContext);
 
-  //PATCH PARA CAMBIAR EL PARAMETRO 'role' => 'paciente' + PARAMETRO 'nutricionista' => loggedUserId
-  const handleAcept = async (e) => {
+  const handleRolePaciente = async (e) => {
     e.preventDefault();
-      const pacienteAñadir = {
-        role:"paciente",
-        nutricionista:loggedUserId
-      }
-  
-      try {
-        await service.patch(`/usuarios/${props.usuario._id}`, pacienteAñadir)
-        navigate("/")
-      } catch (error) {
-        console.log(error)
-        //navigate("/error");
-      } 
+    try {
+      await service.patch(`/usuarios/${props.usuario._id}/paciente`);
+      navigate("/");
+    } catch (error) {
+      navigate("/server-error");
+    }
   };
-  const handleDelete = async (e) => {
+  const handleRoleInvitado = async (e) => {
     e.preventDefault();
-      const pacienteBorrar = {
-        role:"invitado",
-        nutricionista:loggedUserId//no hace falta pero así se controla quien lo 'borra'
-      }
-  
-      try {
-        await service.patch(`/usuarios/${props.usuario._id}`, pacienteBorrar)
-        navigate("/")
-      } catch (error) {
-        console.log(error)
-        //navigate("/error");
-      } 
+    try {
+      await service.patch(`/usuarios/${props.usuario._id}/invitado`);
+      navigate("/");
+    } catch (error) {
+      navigate("/server-error");
+    }
   };
 
   return (
     <Card
-      style={{ width: "100%", minWidth: "fit-content", height: "fit-content" }}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        width: "10rem",
+        minWidth: "fit-content",
+        minHeight:"2rem",
+        maxHeight:"4rem"
+      }}
       data-bs-theme={isDarkTheme ? "dark" : "light"}
     >
+      
       <Card.Body
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-evenly",
+          justifyContent: "center",
+          gap:"2px",
           alignItems: "center",
-          gap: "8px",
           scrollbarWidth: "none",
           overflowY: "scroll",
-          maxHeight: "fit-content",
-          backgroundColor: "#dcdcdc",
+          maxHeight: "fit-content"
         }}
       >
-        <Card.Title>{props.usuario.username}</Card.Title>
+        <Card.Title
+        style={{ width: "5rem",fontSize:"0.5em"}}
+      >
+        {props.usuario.username.toUpperCase()}
+      </Card.Title>
+      
+        <CardText style={{ width: "5rem", height: "3rem"}}>
+          {"Role: "+ props.usuario.role}
+        </CardText>
 
-        <Link to={`/usuario/${props.usuario._id}`}>
-          <Card.Img
-            variant="top"
-            src={props.usuario.imageUrl}
-            width="100rem"
-            height="100rem"
-            style={{ objectFit: "cover" }}
-          />
-        </Link>
-
-        <Button variant="primary" disabled={!isLoggedIn} onClick={handleAcept}>
+        <Button
+          style={{ width: "5rem", height: "3rem", fontSize: "0.7rem" }}
+          variant="primary"
+          disabled={!isLoggedIn}
+          onClick={handleRolePaciente}
+        >
           Añadir paciente
         </Button>
-        <Button variant="primary" disabled={!isLoggedIn} onClick={handleDelete}>
+        <Button
+          style={{ width: "5rem", height: "3rem", fontSize: "0.7rem" }}
+          variant="primary"
+          disabled={!isLoggedIn}
+          onClick={handleRoleInvitado}
+        >
           Borrar paciente
         </Button>
-
-        {/*<Link to={`/usuario/${props.usuario._id}`}>
-          <Button variant="primary">Detalles de usuario</Button>
-      </Link>*/}
       </Card.Body>
     </Card>
   );

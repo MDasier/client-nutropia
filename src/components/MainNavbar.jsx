@@ -9,7 +9,7 @@ import logo from '../assets/images/logopeque.png'
 
 function MainNavbar() {
 
-  const { authenticateUser, isLoggedIn, loggedUserId, loggedUserName, setLoggedUserName, loggedUserImage, isAdmin, isDarkTheme } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, loggedUserName, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
@@ -24,16 +24,19 @@ function MainNavbar() {
   return (
     <Navbar expanded={expanded} expand="lg" bg={isDarkTheme?"dark":"light"} data-bs-theme={isDarkTheme?"dark":"light"} className="bg-body-tertiary" sticky="top">
     <Container>
-      <Navbar.Brand as={Link} to="/"><img src={logo} width={"150px"} alt="logo" /></Navbar.Brand>
+      {isLoggedIn&&<Navbar.Brand as={Link} to="/home"><img src={logo} width={"150px"} alt="logo" /></Navbar.Brand>}
+      {!isLoggedIn&&<Navbar.Brand as={Link} to="/"><img src={logo} width={"150px"} alt="logo" /></Navbar.Brand>}
+      
       
       <Navbar.Toggle onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-
-          <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>Home</Nav.Link>
-
-          <Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link>
           
+          {isLoggedIn&&<Nav.Link as={Link} to="/home" onClick={() => setExpanded(!expanded)}>Home</Nav.Link>}
+          {!isLoggedIn&&<Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>Home</Nav.Link>}
+          
+
+          {isNutri ? <><Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link></>:isAdmin ?<><Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link></>:null}
           {isLoggedIn === false && <>
           <Nav.Link as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> Registro </Nav.Link>
           <Nav.Link as={Link} to="/login" onClick={() => setExpanded(!expanded)}> Acceso </Nav.Link>

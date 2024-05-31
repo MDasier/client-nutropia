@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import service from "../services/config.services";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
 import { Spinner } from "react-bootstrap/esm";
 import PacienteCard from "./PacienteCard";
 
 function ListaPacientes() {
-  const { authenticateUser, isLoggedIn, loggedUserId, loggedUserName, setLoggedUserName, loggedUserImage, isAdmin, isDarkTheme } = useContext(AuthContext)
   const [listaPacientes, setListaPacientes] = useState(null);
   const navigate = useNavigate()
 

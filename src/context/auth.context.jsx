@@ -83,14 +83,8 @@ function AuthWrapper(props) {
     authenticateUser()
   }, [])
 
-  if (isAuthenticating === true) {
-    return (
-      <>
-      <Spinner animation="grow" variant="warning" />
-      <Spinner animation="grow" variant="warning" />
-      <Spinner animation="grow" variant="warning" />
-      </>
-    );
+  if (isAuthenticating){
+    return <Spinner animation="grow" variant="warning" />
   }
 
   return (

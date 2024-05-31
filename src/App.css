@@ -1,11 +1,4 @@
-#root {
-  /*min-height: 100vw;
-  margin: 0 auto;
-  padding: 2rem;*/
-  text-align: center;
-  /*scrollbar-width: "none";
-  overflow-y: "scroll";*/
-}
+/*falta #root*/
 .darkTheme{
   background-color: #303030;
   color:#f3f3f3;
