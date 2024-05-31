@@ -66,7 +66,7 @@ function AuthWrapper(props) {
       setIsPaciente(false)
     }
   }
-  
+  //!funcion llamada get para info de perfil
   const passedContext = {
     isLoggedIn,
     loggedUserId,
@@ -74,6 +74,7 @@ function AuthWrapper(props) {
     loggedUserName,
     setLoggedUserName,
     authenticateUser,
+    //!exportar funcion
     isNutri,
     isPaciente,
     isAdmin

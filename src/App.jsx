@@ -12,9 +12,7 @@ import NotFound from './pages/NotFound.jsx'
 // components
 import MainNavbar from "./components/MainNavbar.jsx"
 import PrivateContent from './components/PrivateContent.jsx';
-import PublicHomePage from './pages/PublicHomePage.jsx';
-
-
+import DetallesPaciente from './components/DetallesPaciente.jsx';
 
 function App() {
 
@@ -23,13 +21,14 @@ function App() {
       <MainNavbar />
       <br />
       <Routes>
-        <Route path="/" element={<PublicHomePage />} />
-        <Route path="/home" element={<PrivateContent><HomePage /></PrivateContent>} />
+        <Route path="/" element={<HomePage />}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/perfil/:userId" element={<PrivateContent><Perfil/></PrivateContent>} />
         <Route path="/perfil/foto-perfil/:userId" element={<PrivateContent><Editimage/></PrivateContent>} />
         <Route path="/control-usuarios" element={<PrivateContent><Controlusuarios/></PrivateContent>} />
+        <Route path="/pacientes/:pacienteId" element={<PrivateContent><DetallesPaciente/></PrivateContent>} />
+
         <Route path="/error" element={<NotFound />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>

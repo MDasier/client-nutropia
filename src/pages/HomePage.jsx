@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState} from "react";
 import { AuthContext } from "../context/auth.context";
 import ListaPacientes from "../components/ListaPacientes";
-import { Link, Navigate } from "react-router-dom";
+import { Link,Navigate } from "react-router-dom";
 import service from "../services/config.services";
 import { Spinner } from "react-bootstrap";
 
@@ -18,23 +18,53 @@ function HomePage() {
       }
       getLoggedUserData()
     }else{
-      <Navigate to="/" />
+      setDatosUsuarioLogueado({username:"Guess"})
     }
   },[])
 
-  if(datosUsuarioLogueado===null){
+  if(isLoggedIn && datosUsuarioLogueado===null){
     return (
       <Spinner animation="border" role="status"></Spinner>
     );
-  }
+  }/*else if(!isLoggedIn && datosUsuarioLogueado===null){
+    setDatosUsuarioLogueado({username:"Guess"})
+  }*/
   return (
     <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-      <h3>Hola {datosUsuarioLogueado.username}!</h3>
+      
+      {/* CONTENIDO PUBLICO */}
+      {!isLoggedIn&&
+      <div>
+        <p>
+          Necesitas registrarte o iniciar sesión para usar la app. Hecha un
+          vistazo a unas recetas saludables mientras te lo piensas!{" "}
+          <a
+            href="https://leftnutrition.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>🥕 RECETAS DE MARINA 🥕</span>
+          </a>
+        </p>
+
+        <h6>
+          Quiero{" "}
+          <Link to="/signup">
+            <span>registrarme</span>
+          </Link>
+        </h6>
+      </div>}
+      
+
+      {/*CONTENIDO EN FUNCION DEL ROLE */}
+      
+        {/* nutricionistas */}
       {isNutri
       ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
+        {isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}
         <h3>Contenido para los nutricionistas</h3>
-        <div>PROXIMA CITA || AGENDA</div>
-        <div>CREAR PLAN NUTRICIONAL</div>
+        <div>PROXIMA CONSULTA: || ABRIR AGENDA</div>{/* CARGAR COMPONENTE AGENDA/CITA */}
+        <div>CREAR UN PLAN NUTRICIONAL</div>{/* CARGAR COMPONENTE PLAN NUTRICIONAL */}
         <div>
           <h6>LISTA DE PACIENTES:</h6>
           <ListaPacientes />
@@ -42,19 +72,19 @@ function HomePage() {
       </div>
       :null}
 
+        {/* pacientes */}
       {isPaciente
       ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
-        <h3>Contenido para los pacientes</h3>
+        {isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-          <h6>PROXIMA CITA</h6>
+          <h6>TU PRÓXIMA REVISIÓN</h6>{/* CARGAR COMPONENTE AGENDA/CITA */}
         </div>
 
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-          <h6>PLANES NUTRICIONALES</h6>
+          <h6>TU PLAN NUTRICIONAL</h6>{/* CARGAR COMPONENTE PLAN NUTRICIONAL */}
         </div>
 
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-          <h6>RECETAS SALUDABLES:</h6>
           <a href="https://leftnutrition.netlify.app" target="_blank" rel="noopener noreferrer">
             <span>🥕 RECETAS DE MARINA 🥕</span>
           </a>

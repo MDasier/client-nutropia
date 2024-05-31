@@ -35,7 +35,7 @@ function Perfil() {
 
     try {
       await service.patch(`/perfil/${loggedUserId}`, perfilEditado)
-      navigate("/home")
+      navigate("/")
     } catch (error) {
       navigate("/error");
     }
