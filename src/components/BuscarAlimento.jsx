@@ -26,7 +26,7 @@ function BuscarAlimento(props) {
   }, [busqueda])
 
   return (
-    <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap" >
+    <div className="d-flex-r m-2 gap-2 justify-content-center align-items-center flex-wrap" >
       <Form.Control
           data-bs-theme={isDarkTheme?"dark":"light"}
           type="text"

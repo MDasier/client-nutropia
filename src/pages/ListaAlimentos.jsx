@@ -3,6 +3,7 @@ import service from "../services/config.services"
 import { Spinner } from "react-bootstrap/esm"
 import AlimentoCard from "../components/AlimentoCard"
 import BuscarAlimento from "../components/BuscarAlimento"
+import BuscarCategoria from "../components/BuscarCategoria"
 
 function ListaAlimentos() {
     const [listaAlimentos, setListaAlimentos] = useState(null)
@@ -25,6 +26,7 @@ function ListaAlimentos() {
             scrollbarWidth: "none",
             overflowY: "scroll"}}>
             <BuscarAlimento setListaAlimentos={setListaAlimentos} />
+            <BuscarCategoria setListaAlimentos={setListaAlimentos} />
             {listaAlimentos
             .map((alimento)=>{
                 return <AlimentoCard key={alimento._id} alimento={alimento} />
