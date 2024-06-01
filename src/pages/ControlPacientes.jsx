@@ -3,7 +3,7 @@ import { AuthContext } from "../context/auth.context";
 import ListaUsuarios from "../components/ListaUsuarios";
 import { Navigate} from "react-router-dom";
 
-function Controlusuarios() {
+function ControlPacientes() {
 
 const { isNutri, isDarkTheme } = useContext(AuthContext)
 
@@ -12,8 +12,8 @@ return (
         {isNutri?
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
           <div>
-            <h6>LISTA DE USUARIOS:</h6>
-            <ListaUsuarios />
+            <h6>Gestión de pacientes:</h6>
+            <ListaUsuarios /> {/* CARGA LOS USUARIOS DE TIPO PACIENTE O INVITADO PARA AÑADIRLOS O QUITARLOS DE LA LISTA DE PACIENTES DEL NUTRICIONISTA QUE LO GESTIONE*/}
           </div>
         </div>
         :<Navigate to="/"/>}
@@ -22,4 +22,4 @@ return (
 )
 }
 
-export default Controlusuarios
+export default ControlPacientes

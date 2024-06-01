@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState} from "react";
 import { AuthContext } from "../context/auth.context";
 import ListaPacientes from "../components/ListaPacientes";
-import { Link,Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import service from "../services/config.services";
 import { Spinner } from "react-bootstrap";
 
@@ -10,25 +10,20 @@ function HomePage() {
   const { isLoggedIn, loggedUserId, isNutri, isPaciente} = useContext(AuthContext)
   const [datosUsuarioLogueado,setDatosUsuarioLogueado] = useState(null)
 
-  useEffect(()=>{
-    if(isLoggedIn){
+  useEffect(() =>{
       const getLoggedUserData = async()=>{
         const loggedUserData = await service.get(`/perfil/${loggedUserId}`)
         setDatosUsuarioLogueado(loggedUserData.data)
       }
       getLoggedUserData()
-    }else{
-      setDatosUsuarioLogueado({username:"Guess"})
-    }
   },[])
 
-  if(isLoggedIn && datosUsuarioLogueado===null){
+  if(datosUsuarioLogueado===null){
     return (
       <Spinner animation="border" role="status"></Spinner>
     );
-  }/*else if(!isLoggedIn && datosUsuarioLogueado===null){
-    setDatosUsuarioLogueado({username:"Guess"})
-  }*/
+  }
+
   return (
     <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       
@@ -62,12 +57,11 @@ function HomePage() {
       {isNutri
       ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
         {isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}
-        <h3>Contenido para los nutricionistas</h3>
         <div>PROXIMA CONSULTA: || ABRIR AGENDA</div>{/* CARGAR COMPONENTE AGENDA/CITA */}
         <div>CREAR UN PLAN NUTRICIONAL</div>{/* CARGAR COMPONENTE PLAN NUTRICIONAL */}
         <div>
           <h6>LISTA DE PACIENTES:</h6>
-          <ListaPacientes />
+          <ListaPacientes />{/* CARGA LOS USUARIOS QUE YA SON PACIENTES DEL NUTRICIONISTA */}
         </div>
       </div>
       :null}

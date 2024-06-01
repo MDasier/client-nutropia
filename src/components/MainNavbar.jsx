@@ -9,7 +9,7 @@ import logo from '../assets/images/logopeque.png'
 
 function MainNavbar() {
 
-  const { authenticateUser, isLoggedIn, loggedUserId, loggedUserName, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
@@ -32,6 +32,7 @@ function MainNavbar() {
         <Nav className="me-auto">
           
           <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>Home</Nav.Link>          
+          <Nav.Link as={Link} to="/alimentos" onClick={() => setExpanded(!expanded)}>Info alimentos</Nav.Link>          
 
           {isNutri ? <><Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link></>:isAdmin ?<><Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link></>:null}
           {isLoggedIn === false && <>

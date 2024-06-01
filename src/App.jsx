@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage.jsx'
 import Login from "./pages/auth/Login.jsx"
 import Signup from "./pages/auth/Signup.jsx"
-import Controlusuarios from './pages/Controlusuarios.jsx';
+import ControlPacientes from './pages/ControlPacientes.jsx';
 import Perfil from './pages/auth/Perfil.jsx'
 import Editimage from './pages/auth/Editimage.jsx';
 import NotFound from './pages/NotFound.jsx'
@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound.jsx'
 import MainNavbar from "./components/MainNavbar.jsx"
 import PrivateContent from './components/PrivateContent.jsx';
 import DetallesPaciente from './components/DetallesPaciente.jsx';
+import ListaAlimentos from './pages/ListaAlimentos.jsx';
 
 function App() {
 
@@ -24,9 +25,10 @@ function App() {
         <Route path="/" element={<HomePage />}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/alimentos" element={<ListaAlimentos />} />
         <Route path="/perfil/:userId" element={<PrivateContent><Perfil/></PrivateContent>} />
         <Route path="/perfil/foto-perfil/:userId" element={<PrivateContent><Editimage/></PrivateContent>} />
-        <Route path="/control-usuarios" element={<PrivateContent><Controlusuarios/></PrivateContent>} />
+        <Route path="/control-usuarios" element={<PrivateContent><ControlPacientes/></PrivateContent>} />
         <Route path="/pacientes/:pacienteId" element={<PrivateContent><DetallesPaciente/></PrivateContent>} />
 
         <Route path="/error" element={<NotFound />}/>
