@@ -3,7 +3,8 @@ import { AuthContext } from "../context/auth.context";
 import ListaPacientes from "../components/ListaPacientes";
 import { Link } from "react-router-dom";
 import service from "../services/config.services";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
+import Citas from "../components/Citas";
 
 function HomePage() {
 
@@ -56,9 +57,11 @@ function HomePage() {
         {/* nutricionistas */}
       {isNutri
       ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
-        {isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}
-        <div>PROXIMA CONSULTA: || ABRIR AGENDA</div>{/* CARGAR COMPONENTE AGENDA/CITA */}
-        <div>CREAR UN PLAN NUTRICIONAL</div>{/* CARGAR COMPONENTE PLAN NUTRICIONAL */}
+        <h3>{isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}</h3>
+        <div ><h6>PROXIMA CONSULTA:<Citas /></h6> 
+        <Button>AGENDA</Button>
+        </div>{/* CARGAR COMPONENTE AGENDA/CITA */}
+        <Button>CREAR UN PLAN NUTRICIONAL</Button>{/* CARGAR COMPONENTE PLAN NUTRICIONAL */}
         <div>
           <h6>LISTA DE PACIENTES:</h6>
           <ListaPacientes />{/* CARGA LOS USUARIOS QUE YA SON PACIENTES DEL NUTRICIONISTA */}

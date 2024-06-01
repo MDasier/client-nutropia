@@ -22,15 +22,18 @@ function ListaAlimentos() {
       }
     
       return (
-        <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap" style={{
-            scrollbarWidth: "none",
-            overflowY: "scroll"}}>
+        <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
             <BuscarAlimento setListaAlimentos={setListaAlimentos} />
             <BuscarCategoria setListaAlimentos={setListaAlimentos} />
-            {listaAlimentos
-            .map((alimento)=>{
-                return <AlimentoCard key={alimento._id} alimento={alimento} />
-            })}
+        
+            <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap" style={{
+                scrollbarWidth: "none",
+                overflowY: "scroll"}}>
+                {listaAlimentos
+                .map((alimento)=>{
+                    return <AlimentoCard key={alimento._id} alimento={alimento} />
+                })}
+            </div>
         </div>
       )
 }

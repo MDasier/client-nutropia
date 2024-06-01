@@ -5,13 +5,16 @@ import service from "../../services/config.services.js";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 function Signup() {
 
   const navigate = useNavigate()
   const [show, setShow] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const { authenticateUser, isLoggedIn, isAdmin, isDarkTheme } = useContext(AuthContext)
+  const { isDarkTheme } = useContext(AuthContext)
+  const [validated, setValidated] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -31,6 +34,16 @@ function Signup() {
   const handleClose = () => setShow(false);
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }else{
+      setValidated(true);
+    }
+
+    
 
     const newUser = {
       email: email,
@@ -64,9 +77,10 @@ function Signup() {
         flexDirection: "column",
         gap: "16px",
       }}
+      noValidate validated={validated}
       onSubmit={handleSignup}
     >
-      <Form.Group controlId="email" className="mb-3">
+      <Form.Group as={Col} controlId="email" className="mb-3">
         <Form.Label>Email*</Form.Label>
         <Form.Control
           type="email"
@@ -76,7 +90,9 @@ function Signup() {
           required
           onChange={handleEmailChange}
         />
+        <Form.Control.Feedback>Parece correcto!</Form.Control.Feedback>
       </Form.Group>
+
       <Form.Group controlId="username" className="mb-3">
         <Form.Label>Nombre de usuario*</Form.Label>
         <Form.Control
@@ -88,6 +104,7 @@ function Signup() {
           onChange={handleUsernameChange}
         />
       </Form.Group>
+
       <Form.Group controlId="password" className="mb-3">
         <Form.Label>Contraseña*</Form.Label>
         <Form.Control
@@ -99,8 +116,17 @@ function Signup() {
           onChange={handlePasswordChange}
         />
       </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Check
+          required
+          checked={isChecked}
+          onChange={handleCheck}
+          label="Aceptar términos y condiones"
+          feedback="Debes aceptar los términos y condiciones para registrarte."
+          feedbackType="invalid"
+        />
+      </Form.Group>
 
-      <h6><input type="checkbox" checked={isChecked} onChange={handleCheck}></input>Aceptar los términos y condiones de NUTROPIA</h6>
       <Button type="submit" disabled={!isChecked}> Registrarme </Button>
       
       {errorMessage && <p>{errorMessage}</p>}
