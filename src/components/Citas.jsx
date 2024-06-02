@@ -5,14 +5,14 @@ import { Spinner } from "react-bootstrap"
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-function Citas() {
+function Citas(props) {
     const [citas,setCitas] = useState(null)
     const [fecha, setFecha] = useState("")//useState(new Date());
     const [consulta, setConsulta] = useState("")
 
     useEffect(()=>{
         const buscarCitas = async () => {
-            const resp = await service.get("/citas/nutri")
+            const resp = await service.get(`/citas/${props.role}`)
             setCitas(resp.data)
             
             const arrFechas = []

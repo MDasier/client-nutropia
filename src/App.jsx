@@ -15,6 +15,8 @@ import ListaAlimentos from './pages/ListaAlimentos.jsx';
 import MainNavbar from "./components/MainNavbar.jsx"
 import PrivateContent from './components/PrivateContent.jsx';
 import DetallesPaciente from './components/DetallesPaciente.jsx';
+import ListaCitas from './pages/ListaCitas.jsx';
+import CrearCita from './components/CrearCita.jsx';
 
 
 
@@ -22,6 +24,7 @@ function App() {
 
   return (
     <div>
+      {/*<Dashboard />*/}
       <MainNavbar />
       <br />
       <Routes>
@@ -32,6 +35,8 @@ function App() {
         <Route path="/perfil/:userId" element={<PrivateContent><Perfil/></PrivateContent>} />
         <Route path="/perfil/foto-perfil/:userId" element={<PrivateContent><Editimage/></PrivateContent>} />
         <Route path="/control-pacientes" element={<PrivateContent><ControlPacientes/></PrivateContent>} />
+        <Route path="/agenda" element={<PrivateContent><ListaCitas/></PrivateContent>} />
+        <Route path="/nueva-cita/:pacienteId" element={<PrivateContent><CrearCita/></PrivateContent>} />
         <Route path="/pacientes/:pacienteId" element={<PrivateContent><DetallesPaciente/></PrivateContent>} />
 
         <Route path="/server-error" element={<NotFound />}/>

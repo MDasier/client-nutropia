@@ -13,7 +13,7 @@ return (
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center">
           <div>
             <h6>Gestión de pacientes:</h6>
-            <ListaUsuarios /> {/* CARGA LOS USUARIOS DE TIPO PACIENTE O INVITADO PARA AÑADIRLOS O QUITARLOS DE LA LISTA DE PACIENTES DEL NUTRICIONISTA QUE LO GESTIONE*/}
+            <ListaUsuarios /> {/* CARGA LOS USUARIOS DE TIPO PACIENTE O INVITADO PARA AÑADIRLOS O QUITARLOS DE LA LISTA DE PACIENTES DEL NUTRICIONISTA QUE ESTÉ CON LA SESION INICIADA*/}
           </div>
         </div>
         :<Navigate to="/"/>}

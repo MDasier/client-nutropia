@@ -9,7 +9,7 @@ import logo from '../assets/images/logopeque.png'
 
 function MainNavbar() {
 
-  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
@@ -33,8 +33,14 @@ function MainNavbar() {
           
           <Nav.Link as={Link} to="/" onClick={() => setExpanded(!expanded)}>Inicio</Nav.Link>          
           <Nav.Link as={Link} to="/alimentos" onClick={() => setExpanded(!expanded)}>Info alimentos</Nav.Link>          
+          <Nav.Link as={Link} to="/agenda" onClick={() => setExpanded(!expanded)}>Agenda</Nav.Link>          
 
-          {isNutri ? <><Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control pacientes</Nav.Link></>:isAdmin ?<><Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link></>:null}
+          {isNutri ? 
+          <><Nav.Link as={Link} to="/control-pacientes" onClick={() => setExpanded(!expanded)}>Control pacientes</Nav.Link></>
+          :isAdmin ?
+          <><Nav.Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Nav.Link></>
+          :null}
+
           {isLoggedIn === false && <>
           <Nav.Link as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> Registro </Nav.Link>
           <Nav.Link as={Link} to="/login" onClick={() => setExpanded(!expanded)}> Acceso </Nav.Link>

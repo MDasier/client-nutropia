@@ -58,8 +58,8 @@ function HomePage() {
       {isNutri
       ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
         <h3>{isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}</h3>
-        <div ><h6>PROXIMA CONSULTA:<Citas /></h6> 
-        <Button>AGENDA</Button>
+        <div ><h6>PROXIMA CONSULTA:<Citas role="nutri" /></h6> 
+        <Button as={Link} to="/agenda">IR A AGENDA</Button>
         </div>{/* CARGAR COMPONENTE AGENDA/CITA */}
         <Button>CREAR UN PLAN NUTRICIONAL</Button>{/* CARGAR COMPONENTE PLAN NUTRICIONAL */}
         <div>
@@ -74,7 +74,7 @@ function HomePage() {
       ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
         {isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-          <h6>TU PRÓXIMA REVISIÓN</h6>{/* CARGAR COMPONENTE AGENDA/CITA */}
+          <div ><h6>TU PROXIMA REVISIÓN:<Citas role="paciente" /></h6> </div>
         </div>
 
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">

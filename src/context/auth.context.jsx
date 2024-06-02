@@ -31,7 +31,7 @@ function AuthWrapper(props) {
       setIsPaciente(false)
       return;
     }
-
+    
     try {
       const response = await service.get("/auth/verify")
       setIsLoggedIn(true)
@@ -65,10 +65,10 @@ function AuthWrapper(props) {
       setIsNutri(false)
       setIsPaciente(false)
     }
+    reloadInfo()
   }
-  //!ASK JORGE - IGUAL ES UN SIMPLE ERROR EN LA LINEA A LA QUE SE REFERIA...
+
 //RELOAD USER INFO FUERA DE AUTHENTICATE
-/*
   const reloadInfo = async () => {
     try {
       const info = await service.get(`/perfil/${loggedUserId}`)
@@ -79,7 +79,7 @@ function AuthWrapper(props) {
       //console.log(error)
     }
   }
-*/
+
   const passedContext = {
     isLoggedIn,
     loggedUserId,
@@ -87,6 +87,7 @@ function AuthWrapper(props) {
     loggedUserName,
     setLoggedUserName,
     authenticateUser,
+    reloadInfo,
     isNutri,
     isPaciente,
     isAdmin
