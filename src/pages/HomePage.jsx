@@ -8,7 +8,7 @@ import Citas from "../components/Citas";
 
 function HomePage() {
 
-  const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos} = useContext(AuthContext)
+  const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor} = useContext(AuthContext)
   const [datosUsuarioLogueado,setDatosUsuarioLogueado] = useState(null)
 
 
@@ -29,7 +29,7 @@ function HomePage() {
 
 
   return (
-    <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
+    <div style={{color:textColor,backgroundColor:backgroundColor}} className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
 
       {/* CONTENIDO PUBLICO */}
       {!isLoggedIn&&

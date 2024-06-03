@@ -7,6 +7,7 @@ import { Button,Spinner } from "react-bootstrap";
 function ListaMensajes() {
   const [mensajesNuevos, setMensajesNuevos] = useState(null);
   const [mensajes, setMensajes] = useState(null);
+  const [placeholder, setPlaceholder] = useState("");
   const { loggedUserId, getNuevosMensajesParaPaciente } = useContext(AuthContext);
 
 
@@ -19,21 +20,24 @@ function ListaMensajes() {
     }
   };
   const marcarComoLeido = async(id) => {
-    console.log(id)
+    //console.log(id)
     try {
         await service.patch(`/mensajes/mensaje-leido`,{id:id})
     } catch (error) {
-        console.log(error)
+        //console.log(error)
     }
     getNuevosMensajesParaPaciente()
   }
 
   useEffect(() => {
     buscarMensajes();
+    if(mensajes===null && mensajesNuevos===null){
+      setPlaceholder("NO HAY MENSAJES QUE MOSTRAR")
+    }
   }, []);
 
   if (mensajes === null) {
-    return <Spinner animation="border" role="status"></Spinner>;
+    return <Spinner animation="border" role="status"></Spinner>
   }
 
   return (
@@ -73,6 +77,7 @@ function ListaMensajes() {
           }} className="d-flex-c m-2 gap-2 justify-content-center align-items-center" key={eachMensaje._id}><p>Mensaje:</p> <h6>{eachMensaje.texto}</h6>
           </div>
       })}
+      <div><h3>{placeholder}</h3></div>
     </div>
   );
 }

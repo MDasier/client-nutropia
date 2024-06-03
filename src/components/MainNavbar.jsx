@@ -6,8 +6,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import defaulUserImg from '../assets/images/defaultUser.png'
 import logo from '../assets/images/logopeque.png'
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Divider } from "@mui/material";
+import { Divider, MenuItem } from "@mui/material";
 import { Dropdown } from "react-bootstrap";
+import Badge from 'react-bootstrap/Badge';
+import { HexColorPicker } from "react-colorful";
 
 function MainNavbar() {
   const [show, setShow] = useState(false);
@@ -15,13 +17,14 @@ function MainNavbar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarColores } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
   useEffect(()=>{
     authenticateUser()
     reloadInfo()
+    getNuevosMensajesParaPaciente()
   },[])
 
   const handleLogout = async () => {
@@ -33,7 +36,7 @@ function MainNavbar() {
   }
 
   return (
-    <Navbar expanded={expanded} expand="lg" bg={isDarkTheme?"dark":"light"} data-bs-theme={isDarkTheme?"dark":"light"} className="bg-body-tertiary" sticky="top">
+    <Navbar expanded={expanded} expand="lg"  style={{backgroundColor:backgroundColor}}/*bg={isDarkTheme?"dark":"light"}*/ data-bs-theme={isDarkTheme?"dark":"light"} /*className="bg-body"*/ sticky="top">
     <Container>
       <Navbar.Brand onClick={handleShow}><img src={logo} width={"150px"} alt="logo" /></Navbar.Brand>
      
@@ -42,10 +45,12 @@ function MainNavbar() {
       <Dropdown drop="start">
       <Dropdown.Toggle variant="ligh" id="dropdown-basic">
       <img src={loggedUserImage?loggedUserImage:defaulUserImg} alt="user" height={"30px"} width={"30px"} style={{borderRadius:"20px"}}/>
+      <Badge bg={cantidadMensajesNuevos===0?backgroundColor:"warning"}>{cantidadMensajesNuevos}</Badge>
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
         <Dropdown.Item as={Link} to={`/`}>Inicio</Dropdown.Item>
+        {isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`}>Mensajes</Dropdown.Item>}
         <Dropdown.Item as={Link} to={`/perfil/${loggedUserId}`}>Perfil</Dropdown.Item>
         <Dropdown.Item as={Link} to={`/perfil/foto-perfil/${loggedUserId}`}>Cambiar foto de perfil</Dropdown.Item>
         <Dropdown.Item onClick={handleLogout}>Cerrar sesión</Dropdown.Item>
@@ -55,6 +60,7 @@ function MainNavbar() {
 
       {!isLoggedIn && 
       <div>
+
       <Dropdown>
       <Dropdown.Toggle variant="ligh" id="dropdown-basic">
       <img src={loggedUserImage?loggedUserImage:defaulUserImg} alt="user" height={"30px"} width={"30px"} style={{borderRadius:"20px"}}/>
@@ -65,7 +71,7 @@ function MainNavbar() {
         <Dropdown.Item as={Link} to={`/login`}>Entrar</Dropdown.Item>
         <Dropdown.Item as={Link} to={`/signup`}>Registrarse</Dropdown.Item>
       </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown>      
       </div>}
     </Container>
     
@@ -73,28 +79,36 @@ function MainNavbar() {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Opciones</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-        <Link to="/" onClick={handleClose}>Inicio</Link> 
-    <Divider />         
-          <Link to="/alimentos" onClick={handleClose}>Info alimentos</Link>     
-    <Divider />     
-          <Link to="/agenda" onClick={handleClose}>Agenda</Link>
-    <Divider />
-          <Link to={`/mensajes/${loggedUserId}`} onClick={handleClose}>Mensajes</Link>
-    <Divider />
+        <Offcanvas.Body>  
+          <MenuItem as={Link} to="/" onClick={handleClose}>Inicio</MenuItem>     
+          <MenuItem as={Link} to="/alimentos" onClick={handleClose}>Info alimentos</MenuItem>    
+          
+          {isLoggedIn&&<MenuItem as={Link} to="/agenda" onClick={handleClose}>Agenda</MenuItem>}
+          {isLoggedIn&&<MenuItem as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}>Mensajes</MenuItem>}
+
         {isNutri ? 
-          <><Link to="/control-pacientes" onClick={handleClose}>Control pacientes</Link></>
+          <><MenuItem as={Link} to="/control-pacientes" onClick={handleClose}>Control pacientes</MenuItem></>
           :isAdmin ?
-          <><Link as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Link></>
+          <><MenuItem as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</MenuItem></>
           :null}
-    <Divider />
-        {isLoggedIn === false && <>
+
+        {!isLoggedIn && <>
           <Link as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> Registro </Link>
           <Link as={Link} to="/login" onClick={() => setExpanded(!expanded)}> Acceso </Link>
           </>}
+
     <Divider />
-    {isLoggedIn&&
-    <Link onClick={handleLogout}> Cerrar sesión </Link>}
+      {isLoggedIn&&
+      <Link onClick={handleLogout}> Cerrar sesión </Link>}
+
+    <Divider />
+    <h6>Cambiar color de fondo ⬇</h6>
+      <MenuItem><HexColorPicker color={backgroundColor} onChange={setBackgroundColor} /></MenuItem>
+    <Divider />
+    <h6>Cambiar color de texto ⬇</h6>
+      <MenuItem><HexColorPicker color={textColor} onChange={setTextColor} /></MenuItem>
+    <Divider />
+      <MenuItem onClick={guardarColores}>Guardar colores</MenuItem>
         </Offcanvas.Body>
       </Offcanvas>
   </Navbar>  

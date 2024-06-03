@@ -1,4 +1,10 @@
 /*falta #root*/
+:root {
+  --fondo: #fff;
+}
+#root{
+  background-color: var(--fondo);
+}
 .darkTheme{
   background-color: #303030;
   color:#f3f3f3;

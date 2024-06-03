@@ -36,7 +36,7 @@ function Citas(props) {
     <div style={{color:"black",width:"fit-content",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
         
       <Calendar defaultActiveStartDate={new Date()} /*onChange={setFecha}*/ value={fecha} />
-      <p>A las {consulta}</p>
+      <p style={{margin:"40px"}}>{consulta===""?null:"A las "+consulta}</p>
         {/*citas.map((eachCita)=>{
             return <p key={eachCita._id}>{eachCita.fecha}</p>
         })*/}

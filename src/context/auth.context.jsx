@@ -2,14 +2,17 @@ import { createContext, useEffect, useState } from "react";
 import service from "../services/config.services";
 import { Spinner } from "react-bootstrap/esm";
 
+
 const AuthContext = createContext()
 
 function AuthWrapper(props) {
- 
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-  const [ isAuthenticating, setIsAuthenticating ] = useState(true)
+  //theme
+  const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("colorFondo"))//state para color de fondo
+  const [textColor, setTextColor] = useState(localStorage.getItem("colorTexto"))//state para color de texto
 
   //Datos
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+  const [ isAuthenticating, setIsAuthenticating ] = useState(true)
   const [ loggedUserId, setLoggedUserId ] = useState(null)
   const [ loggedUserImage, setLoggedUserImage ] = useState(null)
   const [ loggedUserName, setLoggedUserName ] = useState(null)
@@ -21,6 +24,11 @@ function AuthWrapper(props) {
   const [listaMensajesNuevos,setListaMensajesNuevos] = useState([])
   const [cantidadMensajesNuevos,setCantidadMensajesNuevos] = useState(0)
 
+  //funciones
+  const guardarColores = ()=>{
+    localStorage.setItem("colorFondo",backgroundColor)
+    localStorage.setItem("colorTexto",textColor)
+  }
   const getNuevosMensajesParaPaciente = async()=>{
     const mensajesNuevos = await service.get(`/mensajes/nuevos`)
     setListaMensajesNuevos(mensajesNuevos.data)
@@ -75,13 +83,12 @@ function AuthWrapper(props) {
     }
   }
 
-//RELOAD USER INFO FUERA DE AUTHENTICATE
   const reloadInfo = async () => {
     try {
       const info = await service.get(`/perfil/${loggedUserId}`)
       setLoggedUserImage(info.data.imageUrl)
       setLoggedUserName(info.data.username)
-      console.log(info.data)
+      //console.log(info.data)
     } catch (error) {
       //console.log(error)
     }
@@ -99,12 +106,27 @@ function AuthWrapper(props) {
     getNuevosMensajesParaPaciente,
     isNutri,
     isPaciente,
-    isAdmin
+    isAdmin,
+    backgroundColor,
+    setBackgroundColor,
+    textColor,
+    setTextColor,
+    guardarColores
   }
 
   useEffect(() => {
     authenticateUser()
-  }, [])
+
+    if(localStorage.getItem("colorFondo")===null){
+      setBackgroundColor("#ffffff")
+      document.documentElement.style.setProperty('--fondo', "#ffffff")
+    }
+    if(localStorage.getItem("colorTexto")===null){
+      setBackgroundColor("#000000")
+    }
+    document.documentElement.style.setProperty('--fondo', backgroundColor);
+    root.style.setProperty("--fondo", backgroundColor);
+  }, [backgroundColor])
 
   if (isAuthenticating){
     return <Spinner animation="grow" variant="warning" />
