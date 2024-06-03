@@ -13,13 +13,14 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
+import {Link} from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ListaPacientes from '../components/ListaPacientes';
 import ListaAlimentos from './ListaAlimentos';
 import logo from '../assets/images/logopeque.png'
+import { ListItemText,ListItem } from '@mui/material';
 
 function Copyright(props) {//footer integrado en la propia pagina
   return (
@@ -89,7 +90,7 @@ export default function Dashboard() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+   <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -120,7 +121,7 @@ export default function Dashboard() {
               <img src={logo} width={"150px"} alt="logo" />
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={1} color="secondary">{/* ICONO CAMPANA MÁS BADGE */}
+              <Badge badgeContent={0} color="secondary">{/* ICONO CAMPANA MÁS BADGE */}
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -140,15 +141,10 @@ export default function Dashboard() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            <ul>
-                <li>LISTA IZQUIERDA</li>
-                <li>LISTA IZQUIERDA</li>
-                <li>LISTA IZQUIERDA</li>
-            </ul>
-            
-            <Divider sx={{ my: 1 }} />
-            SEGUNDA LISTA IZQUIERDA
+          <List>
+            <ListItem component={Link} to="/login">
+              <ListItemText primary="PENE" onClick={toggleDrawer} />
+            </ListItem>
           </List>
         </Drawer>
         <Box
@@ -164,10 +160,10 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="SM" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
 
-              <Grid item xs={12} md={8} lg={9}>PACIENTES
+              <Grid item xs={12} md={1} lg={1}>PACIENTES
                 <Paper
                   sx={{
                     p: 2,
@@ -177,11 +173,11 @@ export default function Dashboard() {
                     overflow:"scroll"
                   }}
                 >
-                  <ListaPacientes />
+                  
                 </Paper>
               </Grid>
 
-              <Grid item xs={12} md={4} lg={3}>ALIMENTOS
+              <Grid item xs={12} md={1} lg={1}>ALIMENTOS
                 <Paper
                   sx={{
                     p: 2,
@@ -190,13 +186,14 @@ export default function Dashboard() {
                     height: 840,
                   }}
                 >
-                  <ListaAlimentos />
+                 
                 </Paper>
               </Grid>
+
               {/* Recent Orders */}
               <Grid item xs={12}>ELEMENTO3
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  
+                  POLA POLA 
                 </Paper>
               </Grid>
             </Grid>

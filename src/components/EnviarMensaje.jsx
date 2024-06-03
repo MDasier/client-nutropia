@@ -3,11 +3,10 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { AuthContext } from '../context/auth.context';
 import service from "../services/config.services.js"
 import { useNavigate, useParams } from "react-router-dom"
-import Calendar from 'react-calendar';
 
-function CrearCita() {
+function EnviarMensaje() {
     const { loggedUserId, isDarkTheme } = useContext(AuthContext)
-    const [fecha, setFecha] = useState("")
+    const [texto, setTexto] = useState("")
     const {pacienteId} = useParams()
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
@@ -19,16 +18,16 @@ function CrearCita() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const nuevaCita = {
-      paciente:pacienteId,
-      fecha,
+    const nuevoMensaje = {
+      receptor:pacienteId,
+      texto
     }
 
     try {
-      await service.post(`/citas/nueva-cita`, nuevaCita)
-      navigate("/agenda")
+      await service.post(`/mensajes/nuevo-mensaje`, nuevoMensaje)
+      navigate("/")
     } catch (error) {
-      navigate("/error");
+      navigate("/server-error");
     }
   };
 
@@ -47,47 +46,33 @@ function CrearCita() {
       }}
       onSubmit={handleShow}
     >
-
-  {/*2024-06-06T10:30//! CONSEGUIR DATE PICKER */}
-  <Calendar /*defaultActiveStartDate={new Date()}*/ /*value={fecha}*/ onChange={(e)=>setFecha(e.target.value)}/>
-      <Form.Group controlId="paciente" className="mb-3">
-        <Form.Label>PACIENTE</Form.Label>
+  
+      <Form.Group controlId="texto" className="mb-3">
+        <Form.Label>MENSAJE</Form.Label>
         <Form.Control
           type="text"
-          name="paciente"
-          value={pacienteId}
-          disabled          
+          name="mensaje"
+          value={texto}
+          placeholder="Escribe el mensaje"
+          onChange={(e)=>setTexto(e.target.value)}
         />
       </Form.Group>
-
-      <Form.Group controlId="fecha" className="mb-3">
-        <Form.Label>FECHA</Form.Label>
-        <Form.Control
-          type="text"
-          name="fecha"
-          value={fecha}
-          placeholder="YYYY-MM-DDT00:00"
-          onChange={(e)=>setFecha(e.target.value)}
-        />
-      </Form.Group>
-      
-
-      <Button onClick={handleShow}> Nueva Cita </Button>
+      <Button onClick={handleShow}> Enviar </Button>
 
       {/* MODAL */}
       <Modal show={show} data-bs-theme={isDarkTheme?"dark":"light"}>
         <Modal.Header>
-          <Modal.Title  style={{color:isDarkTheme?"#fff":"#212529"}}>Crear cita</Modal.Title>
+          <Modal.Title  style={{color:isDarkTheme?"#fff":"#212529"}}>MENSAJE NUEVO</Modal.Title>
         </Modal.Header>
         <Modal.Body  style={{color:isDarkTheme?"#fff":"#212529"}}>
-          ¿Crear cita?
+          ¿Enviar mensaje?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Volver
           </Button>
           <Button variant="primary" onClick={handleSubmit} type="submit">
-            Crear
+            Enviar
           </Button>
         </Modal.Footer>
       </Modal>
@@ -96,4 +81,4 @@ function CrearCita() {
   )
 }
 
-export default CrearCita
+export default EnviarMensaje

@@ -10,13 +10,14 @@ import Perfil from './pages/auth/Perfil.jsx'
 import Editimage from './pages/auth/Editimage.jsx';
 import NotFound from './pages/NotFound.jsx'
 import ListaAlimentos from './pages/ListaAlimentos.jsx';
-/*import Dashboard from './pages/Dashboard.jsx';*/
 // components
 import MainNavbar from "./components/MainNavbar.jsx"
 import PrivateContent from './components/PrivateContent.jsx';
 import DetallesPaciente from './components/DetallesPaciente.jsx';
 import ListaCitas from './pages/ListaCitas.jsx';
 import CrearCita from './components/CrearCita.jsx';
+import EnviarMensaje from './components/EnviarMensaje.jsx';
+import ListaMensajes from './pages/ListaMensajes.jsx';
 
 
 
@@ -24,7 +25,6 @@ function App() {
 
   return (
     <div>
-      {/*<Dashboard />*/}
       <MainNavbar />
       <br />
       <Routes>
@@ -37,6 +37,8 @@ function App() {
         <Route path="/control-pacientes" element={<PrivateContent><ControlPacientes/></PrivateContent>} />
         <Route path="/agenda" element={<PrivateContent><ListaCitas/></PrivateContent>} />
         <Route path="/nueva-cita/:pacienteId" element={<PrivateContent><CrearCita/></PrivateContent>} />
+        <Route path="/mensajes/:id" element={<PrivateContent><ListaMensajes/></PrivateContent>} />
+        <Route path="/nuevo-mensaje/:pacienteId" element={<PrivateContent><EnviarMensaje/></PrivateContent>} />
         <Route path="/pacientes/:pacienteId" element={<PrivateContent><DetallesPaciente/></PrivateContent>} />
 
         <Route path="/server-error" element={<NotFound />}/>

@@ -18,6 +18,14 @@ function AuthWrapper(props) {
   const [ isAdmin, setIsAdmin] = useState(false)
   const [ isNutri, setIsNutri] = useState(false)
   const [ isPaciente, setIsPaciente] = useState(false)
+  const [listaMensajesNuevos,setListaMensajesNuevos] = useState([])
+  const [cantidadMensajesNuevos,setCantidadMensajesNuevos] = useState(0)
+
+  const getNuevosMensajesParaPaciente = async()=>{
+    const mensajesNuevos = await service.get(`/mensajes/nuevos`)
+    setListaMensajesNuevos(mensajesNuevos.data)
+    setCantidadMensajesNuevos(listaMensajesNuevos.length)
+  }  
 
   const authenticateUser = async () => {
     const authToken = localStorage.getItem("authToken")
@@ -85,9 +93,11 @@ function AuthWrapper(props) {
     loggedUserId,
     loggedUserImage,
     loggedUserName,
+    cantidadMensajesNuevos,
     setLoggedUserName,
     authenticateUser,
     reloadInfo,
+    getNuevosMensajesParaPaciente,
     isNutri,
     isPaciente,
     isAdmin

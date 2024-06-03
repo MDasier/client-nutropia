@@ -27,6 +27,10 @@ function PacienteCard(props) {
         <Link to={`/pacientes/${props.paciente._id}`}><Card.Img variant="top" src={props.paciente.imageUrl} width="10rem" style={{objectFit:"cover"}} /></Link>
         <Card.Title>{props.paciente.username}</Card.Title>
 
+        <Link to={`/nuevo-mensaje/${props.paciente._id}`}>
+          <Button variant="primary">Enviar mensaje</Button>
+        </Link>
+
         <Link to={`/nueva-cita/${props.paciente._id}`}>
           <Button variant="primary">Crear Cita</Button>
         </Link>
