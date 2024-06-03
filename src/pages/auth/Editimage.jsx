@@ -8,7 +8,7 @@ import { Spinner } from "react-bootstrap/esm";
 
 function Editimage() {
 
-const { authenticateUser, isLoggedIn, loggedUserId, isAdmin, isDarkTheme } = useContext(AuthContext)
+const { authenticateUser, reloadInfo, isLoggedIn, loggedUserId, isAdmin, isDarkTheme } = useContext(AuthContext)
 const [imageUrl, setImageUrl] = useState(null); 
 const [isUploading, setIsUploading] = useState(false);
 
@@ -28,44 +28,42 @@ const handleFileUpload = async (event) => {
     console.log(response.data.imageUrl)
     setIsUploading(false);
 
-      const perfilEditado = {
-        imageUrl: response.data.imageUrl
-      }  
-      await service.patch(`/auth/perfil/${loggedUserId}/foto-perfil`, perfilEditado)
-
+    const perfilEditado = {
+      imageUrl: response.data.imageUrl
+    }  
+    await service.patch(`/perfil/${loggedUserId}/foto-perfil`, perfilEditado)
+    authenticateUser()
+    reloadInfo()
     
   } catch (error) {
-    console.log(error)
-    //navigate("/error");
+    navigate("/server-error");
   }
 };
   return (
     <div>
-      
-      <label>Image: </label>
+      {/*
+      <label>Selecciona una imagen: </label>
         <input
           type="file"
           name="image"
           onChange={handleFileUpload}
           disabled={isUploading}
         />
-      {/*  
+      */}
       <Form.Group controlId="imageUrl" className="mb-3">
-        <Form.Label>Imagen del perfil
-          {isUploading ? <Spinner animation="grow" variant="warning" /> : null}
+        <Form.Label>Selecciona una imagen: 
         </Form.Label>
         <Form.Control
           type="file"
-          name="imageUrl"
-          value={imageUrl}
+          name="image"
           onChange={handleFileUpload}
           disabled={isUploading}
         />
       </Form.Group>
-      */}
+
 
       {/* to render a loading message or spinner while uploading the picture */}
-      {isUploading ? <Spinner animation="grow" variant="dark" /> : null}
+      {isUploading ? <Spinner animation="grow" variant="success" /> : null}
 
       {/* below line will render a preview of the image from cloudinary */}
       {imageUrl ? (<div><img src={imageUrl} alt="img" width={200} /></div>) : null}

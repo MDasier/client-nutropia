@@ -73,7 +73,6 @@ function AuthWrapper(props) {
       setIsNutri(false)
       setIsPaciente(false)
     }
-    reloadInfo()
   }
 
 //RELOAD USER INFO FUERA DE AUTHENTICATE
@@ -82,7 +81,7 @@ function AuthWrapper(props) {
       const info = await service.get(`/perfil/${loggedUserId}`)
       setLoggedUserImage(info.data.imageUrl)
       setLoggedUserName(info.data.username)
-      //console.log(info.data)
+      console.log(info.data)
     } catch (error) {
       //console.log(error)
     }
