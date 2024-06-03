@@ -21,7 +21,7 @@ function HomePage() {
       getNuevosMensajesParaPaciente()
   },[])
 
-  if(datosUsuarioLogueado===null){
+  if(isLoggedIn&&datosUsuarioLogueado===null){
     return (
       <Spinner animation="border" role="status"></Spinner>
     );
@@ -30,7 +30,7 @@ function HomePage() {
 
   return (
     <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-      
+
       {/* CONTENIDO PUBLICO */}
       {!isLoggedIn&&
       <div>
@@ -105,7 +105,6 @@ function HomePage() {
 
       </div>
       :null}
-
     </div>
   )
 }
