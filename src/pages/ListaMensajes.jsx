@@ -32,7 +32,7 @@ function ListaMensajes() {
   useEffect(() => {
     buscarMensajes();
     if(mensajes===null && mensajesNuevos===null){
-      setPlaceholder("NO HAY MENSAJES QUE MOSTRAR")
+      setPlaceholder("NO HAY MÁS MENSAJES QUE MOSTRAR")
     }
   }, []);
 
@@ -64,7 +64,7 @@ function ListaMensajes() {
             justifyContent: "center",
             alignItems: "center",
           }} className="d-flex-c m-2 gap-2 justify-content-center align-items-center" key={eachMensaje._id}><p>Mensaje:</p> <h6>{eachMensaje.texto}</h6><p>{eachMensaje.createdAt}</p>
-          <Button variant="success" onClick={()=>marcarComoLeido(eachMensaje._id)}>marcar como leído</Button></div>
+          <Button variant="success" onClick={()=>marcarComoLeido(eachMensaje._id)}>Marcar como leído</Button></div>
       })}
 
     {mensajes&&

@@ -3,13 +3,16 @@ import service from "../services/config.services";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { AuthContext } from "../context/auth.context";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
 
 function ListaCitas() {
+  const navigate = useNavigate()
   const [citas, setCitas] = useState(null);
   const [fecha, setFecha] = useState(""); //useState(new Date());
   const [consulta, setConsulta] = useState("");
-  const [test, setTest] = useState("");
+  const [show, setShow] = useState(false);
   const { isNutri, isPaciente } = useContext(AuthContext);
 /*
   const handleTest = (e) =>{
@@ -17,6 +20,23 @@ function ListaCitas() {
     console.log(test)
   }
 */
+  const handleMarcarRealizada = async (id)=>{
+    try {
+      await service.patch(`/citas/cita-realizada`,{id:id})
+      setShow(true)
+
+      const delayBusqueda = setTimeout(() => {  
+        setShow(false)
+        navigate(0)
+      }, 1500)
+    
+        return () => clearTimeout(delayBusqueda)
+      
+  } catch (error) {
+      //console.log(error)
+  }
+  }
+
   useEffect(() => {
     const buscarCitas = async () => {
 
@@ -61,15 +81,26 @@ function ListaCitas() {
   }
 
   return (
-    <div className="d-flex m-2 gap-2 justify-content-center align-items-center">
+  <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center" style={{width:"100%"}}>
+    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
     <Calendar defaultActiveStartDate={new Date()} /*onClickDay={(e)=>handleTest}*/ value={fecha&&fecha}/>
       <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
         {citas&&
         citas.map((eachCita) => {
-          return <p key={eachCita._id}>Cita: {eachCita.fecha}</p>;
+          return (
+              <div key={eachCita._id} style={{padding:"20px",backgroundColor:"#dcdcdc",borderRadius:"15px",maxWidth:"95%"}}><h4>Cita: {eachCita.fecha}</h4>
+                {eachCita.estado==="pendiente"&&<Button variant="success" onClick={()=>handleMarcarRealizada(eachCita._id)}>Marcar como realizada</Button>}
+                
+              </div>
+          )
+          
         })}
       </div>
+      <Alert variant="info" style={{width:"90%"}} show={show}>
+        Cita marcada como realizada
+      </Alert>
     </div>
+  </div>
   );
 }
 

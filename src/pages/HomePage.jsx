@@ -40,7 +40,7 @@ function HomePage() {
     <div style={{color:textColor,backgroundColor:backgroundColor}} className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
   <Carousel className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
       <Carousel.Item>
-       <img src={logopeque} text="slide1" height={"100%"}/>
+       <img src={logopeque} text="slide1" height={"100%"} style={{maxWidth:"800px",minHeight:"530px"}}/>
 
         <Carousel.Caption>
           <h3 style={{color:"black"}}>Conoce nutropia, tu app para organizar tu consulta de nutrición.</h3>
@@ -48,7 +48,7 @@ function HomePage() {
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={ensalada} text="slide2" width={"50%"}/>
+      <img src={ensalada} text="slide2" width={"100%"} style={{maxWidth:"800px"}}/>
         <Carousel.Caption>
           <h3 style={{color:"black"}}>Verduras y quinoa</h3>
           <p style={{color:"black"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -56,7 +56,7 @@ function HomePage() {
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={panDerecha} text="slide3" width={"50%"}/>
+      <img src={panDerecha} text="slide3" width={"100%"} style={{maxWidth:"800px"}}/>
         <Carousel.Caption>
           <h3 style={{color:"black"}}>Tostas</h3>
           <p style={{color:"black"}}>
@@ -66,7 +66,7 @@ function HomePage() {
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={panIzquierda} text="slide3" width={"50%"}/>
+      <img src={panIzquierda} text="slide3" width={"100%"} style={{maxWidth:"800px"}}/>
         <Carousel.Caption>
           <h3 style={{color:"black"}}>Sándwiches</h3>
           <p style={{color:"black"}}>
@@ -76,7 +76,7 @@ function HomePage() {
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={maderaOscuraAncha} text="slide3" width={"50%"}/>
+      <img src={maderaOscuraAncha} text="slide3" width={"100%"} style={{maxWidth:"800px"}}/>
         <Carousel.Caption>
           <h3 style={{color:"white"}}>Ensalada</h3>
           <p style={{color:"white"}}>

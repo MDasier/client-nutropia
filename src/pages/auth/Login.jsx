@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import service from "../../services/config.services";
 import Button from "react-bootstrap/Button";
@@ -79,6 +79,7 @@ function Login() {
 
       <Button type="submit"> Acceder </Button>
       {errorMessage && <p>{errorMessage}</p>}
+      <Form.Label as={Link} to="/forget">Recuperar contraseña</Form.Label>
     </Form>
       
     </div>

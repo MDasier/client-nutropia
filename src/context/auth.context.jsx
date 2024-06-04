@@ -30,9 +30,11 @@ function AuthWrapper(props) {
     localStorage.setItem("colorTexto",textColor)
   }
   const getNuevosMensajesParaPaciente = async()=>{
-    const mensajesNuevos = await service.get(`/mensajes/nuevos`)
-    setListaMensajesNuevos(mensajesNuevos.data)
-    setCantidadMensajesNuevos(listaMensajesNuevos.length)
+    if(isLoggedIn){
+      const mensajesNuevos = await service.get(`/mensajes/nuevos`)
+      setListaMensajesNuevos(mensajesNuevos.data)
+      setCantidadMensajesNuevos(listaMensajesNuevos.length)
+    }    
   }  
 
   const authenticateUser = async () => {

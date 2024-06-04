@@ -6,21 +6,11 @@
 #root{
   background-color: var(--fondo);
   min-height: 100vh;
-}/*
-.darkTheme{
-  background-color: #303030;
-  color:#f3f3f3;
-  transition: all 0.4s;
 }
-.lightTheme{
-  background-color: #f3f3f3;
-  transition: all 0.8s;
-  color:#303030;
-}*/
 .react-calendar {
   width: 350px;
   max-width: 100%;
-  background: rgb(63, 63, 63);
+  background: rgb(206, 206, 206);
   border: 1px solid var(--fondo);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;

@@ -1,36 +1,75 @@
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import { Form } from "react-bootstrap";
 import axios from "axios";
+import Alert from 'react-bootstrap/Alert';
+import { useNavigate } from "react-router-dom";
 
-const ForgetPassword = () => {//! FALTA HACERLA ASYNC
-  const formik = useFormik({//! HOOK DE REACT QUE DESCONOZCO (USAR OTROS HOOKS?)
-    initialValues: {
-      email: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().email("Email no válido").required("Required"),
-    }),
-    onSubmit: (values) => {
-      axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/password/forgetPassword`, values)//!CONTROLAR QUE LA RUTA ESTÉ BIEN ESCRITA
-        .then((response) => {
-          toast.success("Email enviado!");
-        })
-        .catch((error) => {
-          if (error.response.status === 404) {
-            toast.error("Email no encontrado");
-          } else {
-            toast.error("Error del servidor");
-          }
-        })
-    },
-  });
+const ForgetPassword = () => {
 
+  const [email, setEmail] = useState("");
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate()
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  
+  const handleSendEmail = async (e) => {
+    e.preventDefault();
+
+    const emailToSend = {
+      email: email,
+    }
+
+    try {
+  //comprobar email en bbdd
+
+  //mandar link al email comprobado
+      await axios.post(`http://localhost:5005/api/password/forget-password`, emailToSend)  
+      setShow(true)
+
+      const delayBusqueda = setTimeout(() => {  
+        setShow(false)
+      }, 2500)
+    
+        return () => clearTimeout(delayBusqueda)
+    } catch (error) {
+      //navigate("/server-error")
+    }
+
+  };
   return (
-    // JSX for ForgetPassword component
     <>
+      <h6>Proceso de recuperación de contraseña:</h6>
+      <Form
+        data-bs-theme="light"
+        style={{
+        borderRadius: "16px",
+        padding: "32px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+      }}
+      onSubmit={handleSendEmail}
+    >
+      <Form.Group controlId="email" className="mb-3">
+        <Form.Control
+          type="email"
+          name="email"
+          value={email}
+          placeholder="Escribe tu email"
+          required
+          onChange={handleEmailChange}
+        />
+      </Form.Group>
+
+      <Button type="submit"> Comprobar y enviar </Button>
+      <Alert variant="info" style={{width:"100%",alignContent:"center"}} show={show}>
+        Email enviado, puede tardar unos minutos en llegar
+      </Alert>
+    </Form>
+    
     </>
-  )
+  );
 };
 
 export default ForgetPassword;

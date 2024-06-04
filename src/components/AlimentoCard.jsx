@@ -11,19 +11,17 @@ function AlimentoCard(props) {
       style={{
         display: "flex",
         flexDirection: "column",
-        margin:"10px",
         width: "100%",
-        maxWidth: "100rem",
-        minHeight:"2rem",
-        maxHeight:"4rem"
+        maxWidth: "500px",
+        minHeight:"2rem"
       }}
-      data-bs-theme={isDarkTheme ? "dark" : "light"}
+      data-bs-theme="light"
     >
       
       <Card.Body
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "center",
           gap:"2px",
           alignItems: "center",
@@ -33,17 +31,13 @@ function AlimentoCard(props) {
           padding:"5px"
         }}
       >
-        <Card.Title
-        style={{
-            backgroundColor:"#dcdcdc"
-          }}    
-      >
+        <Card.Title>
         {props.alimento.nombre.toUpperCase()}
-      </Card.Title>
+        </Card.Title>
       
         <Card.Title style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "center",
           gap:"2px",
           alignItems: "center",
