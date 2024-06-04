@@ -7,8 +7,8 @@ const AuthContext = createContext()
 
 function AuthWrapper(props) {
   //theme
-  const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("colorFondo"))//state para color de fondo
-  const [textColor, setTextColor] = useState(localStorage.getItem("colorTexto"))//state para color de texto
+  const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("colorFondo") || "#ffffff")//state para color de fondo
+  const [textColor, setTextColor] = useState(localStorage.getItem("colorTexto") || "#000000")//state para color de texto
 
   //Datos
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
@@ -117,14 +117,7 @@ function AuthWrapper(props) {
   useEffect(() => {
     authenticateUser()
     getNuevosMensajesParaPaciente()
-    
-    if(localStorage.getItem("colorFondo")===null){
-      setBackgroundColor("#ffffff")
-      document.documentElement.style.setProperty('--fondo', "#ffffff")
-    }
-    if(localStorage.getItem("colorTexto")===null){
-      setBackgroundColor("#000000")
-    }
+
     document.documentElement.style.setProperty('--fondo', backgroundColor);
     root.style.setProperty("--fondo", backgroundColor);
   }, [backgroundColor])

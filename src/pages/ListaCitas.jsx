@@ -61,23 +61,14 @@ function ListaCitas() {
   }
 
   return (
-    <div
-      style={{
-        color: "black",
-        width: "fit-content",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      className="d-flex-c m-2 gap-2 justify-content-center align-items-center"
-    >
-      <Calendar defaultActiveStartDate={new Date()} /*onClickDay={(e)=>handleTest}*/ value={fecha&&fecha}/>
-
-      {citas&&
-      citas.map((eachCita) => {
-        return <p key={eachCita._id}>Cita: {eachCita.fecha}</p>;
-      })}
+    <div className="d-flex m-2 gap-2 justify-content-center align-items-center">
+    <Calendar defaultActiveStartDate={new Date()} /*onClickDay={(e)=>handleTest}*/ value={fecha&&fecha}/>
+      <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
+        {citas&&
+        citas.map((eachCita) => {
+          return <p key={eachCita._id}>Cita: {eachCita.fecha}</p>;
+        })}
+      </div>
     </div>
   );
 }

@@ -5,9 +5,14 @@ import { Link } from "react-router-dom";
 import service from "../services/config.services";
 import { Button, Spinner } from "react-bootstrap";
 import Citas from "../components/Citas";
+//galeria de fotos de prueba
 import Carousel from 'react-bootstrap/Carousel';
-import defaulUserImg from '../assets/images/defaultUser.png'
 import logopeque from '../assets/images/logopeque.png'
+import ensalada from '../assets/images/ensalada.jpeg'
+import panDerecha from '../assets/images/panDerecha.jpeg'
+import panIzquierda from '../assets/images/panIzquierda.jpeg'
+import maderaOscuraAncha from '../assets/images/maderaOscuraAncha.jpeg'
+
 
 function HomePage() {
 
@@ -32,29 +37,49 @@ function HomePage() {
 
 
   return (
-    <div style={{color:textColor,backgroundColor:backgroundColor}} className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-  <Carousel>
+    <div style={{color:textColor,backgroundColor:backgroundColor}} className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
+  <Carousel className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
       <Carousel.Item>
-       {/* <ExampleCarouselImage text="First slide" />*/}
-       <img src={logopeque} text="slide1" />
+       <img src={logopeque} text="slide1" height={"100%"}/>
 
         <Carousel.Caption>
-          <h3 style={{color:"black"}}>NUTROPIA APP</h3>
-          <p style={{color:"black"}}>Conoce nutropia, tu app para organizar tu consulta de nutrición.</p>
+          <h3 style={{color:"black"}}>Conoce nutropia, tu app para organizar tu consulta de nutrición.</h3>
         </Carousel.Caption>
       </Carousel.Item>
+
       <Carousel.Item>
-      <img src={defaulUserImg} text="slide2" />
+      <img src={ensalada} text="slide2" width={"50%"}/>
         <Carousel.Caption>
-          <h3 style={{color:"black"}}>Second slide label</h3>
+          <h3 style={{color:"black"}}>Verduras y quinoa</h3>
           <p style={{color:"black"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>
+
       <Carousel.Item>
-      <img src={defaulUserImg} text="slide3" />
+      <img src={panDerecha} text="slide3" width={"50%"}/>
         <Carousel.Caption>
-          <h3 style={{color:"black"}}>Third slide label</h3>
+          <h3 style={{color:"black"}}>Tostas</h3>
           <p style={{color:"black"}}>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+
+      <Carousel.Item>
+      <img src={panIzquierda} text="slide3" width={"50%"}/>
+        <Carousel.Caption>
+          <h3 style={{color:"black"}}>Sándwiches</h3>
+          <p style={{color:"black"}}>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+
+      <Carousel.Item>
+      <img src={maderaOscuraAncha} text="slide3" width={"50%"}/>
+        <Carousel.Caption>
+          <h3 style={{color:"white"}}>Ensalada</h3>
+          <p style={{color:"white"}}>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>
         </Carousel.Caption>

@@ -33,7 +33,7 @@ function Citas(props) {
         return <Spinner animation="border" role="status"></Spinner>
     }
   return (
-    <div style={{color:"black",width:"fit-content",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
+    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
         
       <Calendar defaultActiveStartDate={new Date()} /*onChange={setFecha}*/ value={fecha} />
       <p style={{margin:"40px"}}>{consulta===""?null:"A las "+consulta}</p>

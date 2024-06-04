@@ -9,6 +9,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Dropdown } from "react-bootstrap";
 import Badge from 'react-bootstrap/Badge';
 import { HexColorPicker } from "react-colorful";
+import { Button } from "react-bootstrap/esm";
 
 function MainNavbar() {
   const [show, setShow] = useState(false);
@@ -74,40 +75,54 @@ function MainNavbar() {
       </div>}
     </Container>
     
-    <Offcanvas show={show} onHide={handleClose} /*responsive="lg"*/ style={{width:"50%"}}>
+    <Offcanvas show={show} onHide={handleClose} /*responsive="xl"*/ /*style={{width:"50%"}}*/>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Opciones</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>  
-          <Link to="/" onClick={handleClose}>Inicio</Link>     
-          <Link to="/alimentos" onClick={handleClose}>Info alimentos</Link>    
+        <Dropdown.Item as={Link} to="/" onClick={handleClose}>Inicio</Dropdown.Item>     
+        <Dropdown.Item as={Link} to="/alimentos" onClick={handleClose}>Info alimentos</Dropdown.Item>    
           
-          {isLoggedIn&&<Link  to="/agenda" onClick={handleClose}>Agenda</Link>}
-          {isLoggedIn&&<Link  to={`/mensajes/${loggedUserId}`} onClick={handleClose}>Mensajes</Link>}
+          {isLoggedIn&&<Dropdown.Item as={Link} to="/agenda" onClick={handleClose}>Agenda</Dropdown.Item>}
+          {isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}>Mensajes</Dropdown.Item>}
 
         {isNutri ? 
-          <><Link  to="/control-pacientes" onClick={handleClose}>Control pacientes</Link></>
+          <><Dropdown.Item as={Link} to="/control-pacientes" onClick={handleClose}>Control pacientes</Dropdown.Item></>
           :isAdmin ?
-          <><Link  to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Link></>
+          <><Dropdown.Item as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Dropdown.Item></>
           :null}
 
         {!isLoggedIn && <>
-          <Link  to="/signup" onClick={() => setExpanded(!expanded)}> Registro </Link>
-          <Link  to="/login" onClick={() => setExpanded(!expanded)}> Acceso </Link>
+          <Dropdown.Item as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> Registro </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/login" onClick={() => setExpanded(!expanded)}> Acceso </Dropdown.Item>
           </>}
 
 
       {isLoggedIn&&
-      <Link onClick={handleLogout}> Cerrar sesión </Link>}
+      <Dropdown.Item onClick={handleLogout}> Cerrar sesión <Dropdown.Divider /></Dropdown.Item>}
 
+    <Dropdown drop="down">
+      <Dropdown.Toggle variant="light" id="dropdown-fondo">
+        <h6>Cambiar color de fondo ⬇</h6>
+      </Dropdown.Toggle>
+    
+      <Dropdown.Menu>
+        <Dropdown.Item><HexColorPicker color={backgroundColor} onChange={setBackgroundColor} /></Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
 
-    <h6>Cambiar color de fondo ⬇</h6>
-      <Link><HexColorPicker color={backgroundColor} onChange={setBackgroundColor} /></Link>
-
-    <h6>Cambiar color de texto ⬇</h6>
-      <Link><HexColorPicker color={textColor} onChange={setTextColor} /></Link>
-
-      <Link onClick={guardarColores}>Guardar colores</Link>
+    <Dropdown drop="down">
+      <Dropdown.Toggle variant="light" id="dropdown-texto">
+        <h6>Cambiar color de texto ⬇</h6>
+      </Dropdown.Toggle>
+    
+      <Dropdown.Menu>
+      <Dropdown.Item><HexColorPicker color={textColor} onChange={setTextColor} /></Dropdown.Item>
+      </Dropdown.Menu>
+      <Dropdown.Divider />
+    </Dropdown>
+    
+      <Button /*as={Button}*/ variant="success" onClick={guardarColores}>Guardar colores</Button>
         </Offcanvas.Body>
       </Offcanvas>
   </Navbar>  

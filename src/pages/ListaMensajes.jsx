@@ -41,10 +41,12 @@ function ListaMensajes() {
   }
 
   return (
+  <>
+
     <div
       style={{
         color: "black",
-        width: "fit-content",
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -56,12 +58,12 @@ function ListaMensajes() {
       mensajesNuevos.map((eachMensaje) => {
         return <div style={{
             backgroundColor: "#dcdcdc",
-            width: "10rem",
+            width: "20rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-          }} className="d-flex-c m-2 gap-2 justify-content-center align-items-center" key={eachMensaje._id}><p>Mensaje:</p> <h6>{eachMensaje.texto}</h6>
+          }} className="d-flex-c m-2 gap-2 justify-content-center align-items-center" key={eachMensaje._id}><p>Mensaje:</p> <h6>{eachMensaje.texto}</h6><p>{eachMensaje.createdAt}</p>
           <Button variant="success" onClick={()=>marcarComoLeido(eachMensaje._id)}>marcar como leído</Button></div>
       })}
 
@@ -69,7 +71,7 @@ function ListaMensajes() {
       mensajes.map((eachMensaje) => {
         return <div style={{
             backgroundColor: "#dcdcdc",
-            width: "10rem",
+            width: "20rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -78,7 +80,8 @@ function ListaMensajes() {
           </div>
       })}
       <div><h3>{placeholder}</h3></div>
-    </div>
+    </div>  
+    </>
   );
 }
 
