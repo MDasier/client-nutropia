@@ -116,7 +116,8 @@ function AuthWrapper(props) {
 
   useEffect(() => {
     authenticateUser()
-
+    getNuevosMensajesParaPaciente()
+    
     if(localStorage.getItem("colorFondo")===null){
       setBackgroundColor("#ffffff")
       document.documentElement.style.setProperty('--fondo', "#ffffff")

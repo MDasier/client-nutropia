@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: `http://localhost:5005/api`
+  baseURL: `${import.meta.env.ORIGIN}/api`
 })
 
 service.interceptors.request.use((config) => {
