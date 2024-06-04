@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import service from "../services/config.services";
 import { Button, Spinner } from "react-bootstrap";
 import Citas from "../components/Citas";
+import Carousel from 'react-bootstrap/Carousel';
+import defaulUserImg from '../assets/images/defaultUser.png'
+import logopeque from '../assets/images/logopeque.png'
 
 function HomePage() {
 
@@ -30,6 +33,33 @@ function HomePage() {
 
   return (
     <div style={{color:textColor,backgroundColor:backgroundColor}} className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
+  <Carousel>
+      <Carousel.Item>
+       {/* <ExampleCarouselImage text="First slide" />*/}
+       <img src={logopeque} text="slide1" />
+
+        <Carousel.Caption>
+          <h3 style={{color:"black"}}>NUTROPIA APP</h3>
+          <p style={{color:"black"}}>Conoce nutropia, tu app para organizar tu consulta de nutrición.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+      <img src={defaulUserImg} text="slide2" />
+        <Carousel.Caption>
+          <h3 style={{color:"black"}}>Second slide label</h3>
+          <p style={{color:"black"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+      <img src={defaulUserImg} text="slide3" />
+        <Carousel.Caption>
+          <h3 style={{color:"black"}}>Third slide label</h3>
+          <p style={{color:"black"}}>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
 
       {/* CONTENIDO PUBLICO */}
       {!isLoggedIn&&

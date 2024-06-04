@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: `${import.meta.env.ORIGIN}/api`
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`
 })
 
 service.interceptors.request.use((config) => {
