@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
-import { AuthContext } from '../context/auth.context';
+import { AuthContext } from '../context/auth.context.jsx';
 import service from "../services/config.services.js"
 import { useNavigate, useParams } from "react-router-dom"
 import Calendar from 'react-calendar';

@@ -13,10 +13,10 @@ import ListaAlimentos from './pages/ListaAlimentos.jsx';
 // components
 import MainNavbar from "./components/MainNavbar.jsx"
 import PrivateContent from './components/PrivateContent.jsx';
-import DetallesPaciente from './components/DetallesPaciente.jsx';
+import DetallesPaciente from './pages/DetallesPaciente.jsx';
 import ListaCitas from './pages/ListaCitas.jsx';
-import CrearCita from './components/CrearCita.jsx';
-import EnviarMensaje from './components/EnviarMensaje.jsx';
+import CrearCita from './pages/CrearCita.jsx';
+import EnviarMensaje from './pages/EnviarMensaje.jsx';
 import ListaMensajes from './pages/ListaMensajes.jsx';
 
 
