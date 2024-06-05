@@ -59,7 +59,7 @@ function Settings() {
       <Form.Group controlId="cfondo" className="mb-3" data-bs-theme={isDarkTheme}>
         <Dropdown drop="down" data-bs-theme={isDarkTheme}>
           <Dropdown.Toggle variant={isDarkTheme} id="dropdown-fondo">
-            <h6  style={{ fontWeight: fontWeigth}}>🪣 Cambiar color de fondo ⬇</h6>
+            <h6  style={{ fontWeight: fontWeigth}}>🎨 Cambiar color de fondo ⬇</h6>
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item>

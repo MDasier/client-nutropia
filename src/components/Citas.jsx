@@ -16,15 +16,17 @@ function Citas(props) {
             setCitas(resp.data)
             
             const arrFechas = []
-            resp.data.map((eachCita)=>{
+            if(resp.data.length>0){//empezando a controlar posibles fallos
+              resp.data.map((eachCita)=>{
                 return arrFechas.push(eachCita.fecha)
-            })
-            const restaFechas = arrFechas.map(fecha => Math.abs(new Date(fecha) - new Date()))
-            const iFechaMasCercana = restaFechas.indexOf(Math.min(...restaFechas))
-            setFecha(resp.data[iFechaMasCercana].fecha)//fecha más cercana a la de 'hoy'
-            const horaArr = resp.data[iFechaMasCercana].fecha.split('T')
-            const horaExacta = horaArr[1].split('.')
-            setConsulta(horaExacta[0])
+              })
+              const restaFechas = arrFechas.map(fecha => Math.abs(new Date(fecha) - new Date()))
+              const iFechaMasCercana = restaFechas.indexOf(Math.min(...restaFechas))
+              setFecha(resp.data[iFechaMasCercana].fecha)//fecha más cercana a la de 'hoy'
+              const horaArr = resp.data[iFechaMasCercana].fecha.split('T')
+              const horaExacta = horaArr[1].split('.')
+              setConsulta(horaExacta[0])
+            }            
         }
         buscarCitas()
     },[])
@@ -36,7 +38,7 @@ function Citas(props) {
     <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
         
       <Calendar defaultActiveStartDate={new Date()} /*onChange={setFecha}*/ value={fecha} />
-      <p style={{margin:"40px"}}>{consulta===""?null:"A las "+consulta}</p>
+      <p style={{margin:"40px"}}>{consulta===""?"Agenda vacía":"A las "+consulta}</p>
         {/*citas.map((eachCita)=>{
             return <p key={eachCita._id}>{eachCita.fecha}</p>
         })*/}

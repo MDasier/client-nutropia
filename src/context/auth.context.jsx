@@ -89,6 +89,7 @@ function AuthWrapper(props) {
       setIsAdmin(false)
       setIsNutri(false)
       setIsPaciente(false)
+      setLoggedUserImage(null)
     }
   }
 
@@ -98,6 +99,7 @@ function AuthWrapper(props) {
         const info = await service.get(`/perfil/${loggedUserId}`)
         setLoggedUserImage(info.data.imageUrl)
         setLoggedUserName(info.data.username)
+        setCantidadMensajesNuevos()
       }
     } catch (error) {
       //console.log(error)
@@ -111,6 +113,7 @@ function AuthWrapper(props) {
     loggedUserName,
     cantidadMensajesNuevos,
     setLoggedUserName,
+    setLoggedUserImage,
     authenticateUser,
     reloadInfo,
     getNuevosMensajesParaPaciente,

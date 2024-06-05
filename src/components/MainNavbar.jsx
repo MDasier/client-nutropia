@@ -9,7 +9,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Dropdown } from "react-bootstrap";
 import Badge from 'react-bootstrap/Badge';
 import { HexColorPicker } from "react-colorful";
-import { Button } from "react-bootstrap/esm";
+import { Anchor, Button } from "react-bootstrap/esm";
 import Alert from 'react-bootstrap/Alert';
 
 function MainNavbar() {
@@ -18,7 +18,7 @@ function MainNavbar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarConfiguracion } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, setLoggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarConfiguracion } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
@@ -32,6 +32,7 @@ function MainNavbar() {
     setExpanded(!expanded)
     localStorage.removeItem("authToken")
     setLoggedUserName(null)
+    setLoggedUserImage(null)
     await authenticateUser()
     navigate("/login")
   }
@@ -96,8 +97,8 @@ function MainNavbar() {
         <Dropdown.Item as={Link} to="/" onClick={handleClose}> 🏠 Inicio </Dropdown.Item>     
         <Dropdown.Item as={Link} to="/alimentos" onClick={handleClose}> 🥕 Info alimentos</Dropdown.Item>    
           
-          {isLoggedIn&&<Dropdown.Item as={Link} to="/agenda" onClick={handleClose}>Agenda</Dropdown.Item>}
-          {isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}>Mensajes</Dropdown.Item>}
+          {isLoggedIn&&<Dropdown.Item as={Link} to="/agenda" onClick={handleClose}> 📅 Agenda</Dropdown.Item>}
+          {isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}> ✉️ Mensajes</Dropdown.Item>}
 
         {isNutri ? 
           <><Dropdown.Item as={Link} to="/control-pacientes" onClick={handleClose}>Control pacientes</Dropdown.Item></>
@@ -112,15 +113,13 @@ function MainNavbar() {
 
 
       {isLoggedIn&&
-      <Dropdown.Item onClick={handleLogout}> Cerrar sesión </Dropdown.Item>}
+      <Dropdown.Item onClick={handleLogout}>🔓 Cerrar sesión </Dropdown.Item>}
 
-<Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de todos los estilos</Dropdown.Item>
-        <h6>Estilos básicos:</h6>
-
-
+    <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de estilos</Dropdown.Item>
+<div style={{height:"5%",backgroundColor:"#cdcdcd"}}><h6>Otras opciones y enlaces</h6><hr /></div>
     <Dropdown drop="down">
       <Dropdown.Toggle variant="light" id="dropdown-fondo">
-        <h6>🪣 Cambiar color de fondo ⬇</h6>
+        <h6>🎨 Cambiar color de fondo ⬇</h6>
       </Dropdown.Toggle>
     
       <Dropdown.Menu>
@@ -139,7 +138,26 @@ function MainNavbar() {
       <Dropdown.Divider />
     </Dropdown>
     
-      <Button variant="success" onClick={showAlertyGuardar} style={{color:textColor}}>Guardar</Button>
+      <Button variant="success" onClick={showAlertyGuardar} style={{color:textColor}}> 💾 Guardar colores</Button>
+      <hr />
+      <Dropdown.Item
+        href="https://github.com/MDasier/client-nutropia"
+        target="_blank"
+        rel="noopener noreferrer" // Se recomienda añadir estos valores para seguridad
+        onClick={handleClose}
+      >
+        <span style={{fontSize:"12px"}}>🐈‍⬛{' >'} Enlace al repositorio de github</span>
+      </Dropdown.Item>
+
+      <Dropdown.Item
+        href="https://github.com/MDasier"
+        target="_blank"
+        rel="noopener noreferrer" // Se recomienda añadir estos valores para seguridad
+        onClick={handleClose}
+      >
+        <span style={{fontSize:"12px"}}>👨‍💻 Made with ❤️ by asierMD</span>
+      </Dropdown.Item>
+
       <Alert variant="success" style={{width:"100%",alignContent:"center"}} show={showAlert}>
         Colores guardados
       </Alert>
