@@ -101,6 +101,10 @@ function MainNavbar() {
       {isLoggedIn&&
       <Dropdown.Item onClick={handleLogout}> Cerrar sesión <Dropdown.Divider /></Dropdown.Item>}
 
+<Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de todos los estilos</Dropdown.Item>
+        <h6>Estilos básicos:</h6>
+
+
     <Dropdown drop="down">
       <Dropdown.Toggle variant="light" id="dropdown-fondo">
         <h6>🪣 Cambiar color de fondo ⬇</h6>
@@ -122,9 +126,8 @@ function MainNavbar() {
       <Dropdown.Divider />
     </Dropdown>
     
-      <Button variant="success" onClick={guardarColores}>Guardar colores</Button>
-      <br />
-      <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de todos los estilos</Dropdown.Item>
+      <Button variant="success" onClick={guardarColores} style={{color:textColor}}>Guardar colores</Button>
+
       </Offcanvas.Body>
         
       </Offcanvas>

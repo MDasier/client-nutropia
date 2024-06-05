@@ -169,3 +169,27 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
 }
+.offcanvas-header{
+  background-color: var(--fondo);
+  color: var(--texto);
+}
+.offcanvas-body{
+  background-color: var(--fondo);
+  color: var(--texto);
+  gap: 16px;
+  padding: 20px;
+}
+.offcanvas-body a,.offcanvas-body button,.offcanvas-body h6{
+  /*text-align: end;*/
+  display: flex;
+  align-items: end;
+  justify-content: flex-start;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+}
+.offcanvas-body a:hover,.offcanvas-body button:hover{
+  border: none;
+  background-color: transparent;
+  filter: brightness(150%);
+}

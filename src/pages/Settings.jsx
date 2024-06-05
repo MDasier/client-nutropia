@@ -41,75 +41,82 @@ function Settings() {
   }
 
   return (
-    <div
-      style={{
-        fontWeight: fontWeigth,
+    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
+      <Form 
+        data-bs-theme={isDarkTheme}
+        style={{
+        borderRadius: "16px",
+        padding: "32px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap"
-    >
-      <Dropdown drop="down" data-bs-theme={isDarkTheme}>
-        <Dropdown.Toggle variant={isDarkTheme} id="dropdown-fondo">
-          <h6  style={{ fontWeight: fontWeigth}}>🪣 Cambiar color de fondo ⬇</h6>
-        </Dropdown.Toggle>
+        justifyContent:"center",
+        alignItems:"center",
+        alignContent:"center",
+        gap: "16px",
+        width:"100%"
+      }}>
 
-        <Dropdown.Menu>
-          <Dropdown.Item>
-            <HexColorPicker
-              color={backgroundColor}
-              onChange={setBackgroundColor}
-            />
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+      <Form.Group controlId="cfondo" className="mb-3" data-bs-theme={isDarkTheme}>
+        <Dropdown drop="down" data-bs-theme={isDarkTheme}>
+          <Dropdown.Toggle variant={isDarkTheme} id="dropdown-fondo">
+            <h6  style={{ fontWeight: fontWeigth}}>🪣 Cambiar color de fondo ⬇</h6>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item>
+              <HexColorPicker
+                color={backgroundColor}
+                onChange={setBackgroundColor}
+              />
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Form.Group>
 
-      <Dropdown drop="down" data-bs-theme={isDarkTheme}>
-        <Dropdown.Toggle variant={isDarkTheme} id="dropdown-texto">
-          <h6 style={{ fontWeight: fontWeigth}}>🖌️ Cambiar color de texto ⬇</h6>
-        </Dropdown.Toggle>
+      <Form.Group controlId="ctexto" className="mb-3" data-bs-theme={isDarkTheme}>
+        <Dropdown drop="down" data-bs-theme={isDarkTheme}>
+          <Dropdown.Toggle variant={isDarkTheme} id="dropdown-texto">
+            <h6 style={{ fontWeight: fontWeigth}}>🖌️ Cambiar color de texto ⬇</h6>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item>
+              <HexColorPicker color={textColor} onChange={setTextColor} />
+            </Dropdown.Item>
+          </Dropdown.Menu>
+          <Dropdown.Divider />
+        </Dropdown>
+      </Form.Group>
 
-        <Dropdown.Menu>
-          <Dropdown.Item>
-            <HexColorPicker color={textColor} onChange={setTextColor} />
-          </Dropdown.Item>
-        </Dropdown.Menu>
-        <Dropdown.Divider />
-      </Dropdown>
+      <Form.Group controlId="gtexto" className="mb-3" data-bs-theme={isDarkTheme}>
+        <Form.Label>Ancho o grosor de texto (Font weight) </Form.Label>
+        <Form.Select
+          data-bs-theme={isDarkTheme}
+          aria-label="Default select example"
+          onChange={(e) => setFontWeigth(e.target.value)}
+          style={{ fontWeight: fontWeigth, maxWidth: "400px" }}
+        >
+          <option value="400" disabled>
+            Por defecto '400'
+          </option>
+          <option value="400">400 - Normal</option>
+          <option value="500">500 - Medium</option>
+          <option value="600">600 - Semi BOLD</option>
+          <option value="700">700 - BOLD</option>
+        </Form.Select>
+      </Form.Group>
 
-      <FormGroup>
-      <FormLabel>Ancho o grosor de texto (Font weight) </FormLabel>
-      <Form.Select
-        data-bs-theme={isDarkTheme}
-        aria-label="Default select example"
-        onChange={(e) => setFontWeigth(e.target.value)}
-        style={{ fontWeight: fontWeigth, maxWidth: "400px" }}
-      >
-        <option value="400" disabled>
-          Por defecto '400'
-        </option>
-        <option value="400">400 - Normal</option>
-        <option value="500">500 - Medium</option>
-        <option value="600">600 - Semi BOLD</option>
-        <option value="700">700 - BOLD</option>
-      </Form.Select>
-      </FormGroup>
-
-      <FormGroup>
-      <FormLabel>Modo claro o modo oscuro para los 'formularios' </FormLabel>
-      <Form.Select
-        data-bs-theme={isDarkTheme}
-        aria-label="select example"
-        onChange={(e) => setIsDarkTheme(e.target.value)}
-        style={{ fontWeight: fontWeigth, maxWidth: "400px" }}
-      >
-        <option value="light" disabled>Por defecto 'Claro'</option>
-        <option value="light">Claro</option>
-        <option value="dark">Oscuro</option>
-      </Form.Select>
-      </FormGroup>
+      <Form.Group controlId="theme" className="mb-3" data-bs-theme={isDarkTheme}>
+        <Form.Label>Modo claro o modo oscuro </Form.Label>
+        <Form.Select
+          data-bs-theme={isDarkTheme}
+          aria-label="select example"
+          onChange={(e) => setIsDarkTheme(e.target.value)}
+          style={{ fontWeight: fontWeigth, maxWidth: "400px" }}
+        >
+          <option value="light" disabled>Por defecto 'Claro'</option>
+          <option value="light">Claro</option>
+          <option value="dark">Oscuro</option>
+        </Form.Select>
+      </Form.Group>
 
       <Button variant="success" onClick={showAlert}>
         Guardar
@@ -118,6 +125,7 @@ function Settings() {
       <Alert variant="info" style={{width:"100%",alignContent:"center"}} show={show}>
         Configuración guardada correctamente
       </Alert>
+      </Form>
     </div>
   );
 }
