@@ -122,7 +122,7 @@ function Settings() {
         Guardar
       </Button>
 
-      <Alert variant="succes" style={{width:"100%",alignContent:"center"}} show={show}>
+      <Alert variant="success" style={{width:"50%",alignContent:"center"}} show={show}>
         Configuración guardada correctamente
       </Alert>
       </Form>
