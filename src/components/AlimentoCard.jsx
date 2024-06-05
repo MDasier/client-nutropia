@@ -1,12 +1,26 @@
-
 import Card from "react-bootstrap/Card";
-import { AuthContext } from "../context/auth.context";
-import { useContext } from "react";
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from "react-bootstrap/Button";
 
 function AlimentoCard(props) {
-  const {isDarkTheme} = useContext(AuthContext);
+
+  const handleAñadir = (e)=>{
+    e.preventDefault();
+    props.setArrAlimentos([...(props.arrAlimentos),props.alimento])
+  }
+  const handleQuitar = (e)=>{
+    e.preventDefault()
+    const arrClone = [...(props.arrAlimentos)]
+    arrClone.splice(props.i, 1)
+    //console.log(arrClone)
+    props.setArrAlimentos(arrClone)
+  }
 
   return (
+    /* //?Cambiar por esta version si consigo imagenes
+    <Card.Img src="holder.js/100px270" alt="Card image" />
+      <Card.ImgOverlay>
+     */
     <Card
       style={{
         display: "flex",
@@ -16,43 +30,43 @@ function AlimentoCard(props) {
         minHeight:"2rem"
       }}
       data-bs-theme="light"
-    >
       
+    >
+      <Card.Header style={{display:"flex",justifyContent:"space-between"}}>
+      <Card.Title>
+        {props.alimento.nombre.toUpperCase()}
+        </Card.Title>
+        {props.arr?<Button variant="secondary" size="sm" onClick={handleQuitar}>-</Button>:<Button variant="secondary" size="sm" onClick={handleAñadir}>+</Button>}
+        
+      </Card.Header>
+
       <Card.Body
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap:"2px",
-          alignItems: "center",
+          gap:"20px",
+          alignItems:"center",
           scrollbarWidth: "none",
           overflowY: "scroll",
           maxHeight: "fit-content",
-          padding:"5px"
+          padding:"5px",
+          margin:"5px"
         }}
       >
-        <Card.Title>
-        {props.alimento.nombre.toUpperCase()}
-        </Card.Title>
-      
-        <Card.Title style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap:"2px",
-          alignItems: "center",
-          scrollbarWidth: "none",
-          overflowY: "scroll",
-          maxHeight: "fit-content",
-          padding:"5px"
-        }}>
-          <p>{"Categoría: "+ props.alimento.categoria}</p>
-          <p>{"Medida: "+ props.alimento.medida}</p>
-          <p>{"Grasas: "+ props.alimento.grasas}</p>
-          <p>{"Hidratos: "+ props.alimento.HC}</p>
-          <p>{"Proteínas: "+ props.alimento.proteinas}</p>
-          <p>{"Calorías: "+ props.alimento.energiaKCAL}</p>
-        </Card.Title>
+
+        <Card.Subtitle className="text-muted">
+        {"Categoría: "+ props.alimento.categoria}
+        </Card.Subtitle>
+
+        <ListGroup variant="flush">
+          <ListGroup.Item>{"Medida: "+ props.alimento.medida}</ListGroup.Item>
+          <ListGroup.Item>{"Grasas: "+ props.alimento.grasas}</ListGroup.Item>
+          <ListGroup.Item>{"Hidratos: "+ props.alimento.HC}</ListGroup.Item>
+          <ListGroup.Item>{"Proteínas: "+ props.alimento.proteinas}</ListGroup.Item>
+          <ListGroup.Item>{"Calorías: "+ props.alimento.energiaKCAL}</ListGroup.Item>
+        </ListGroup>
+        
       </Card.Body>
     </Card>
   );
