@@ -10,7 +10,7 @@
 .react-calendar {
   width: 350px;
   max-width: 100%;
-  background: rgb(206, 206, 206);
+  background: var(--fondo);
   border: 1px solid var(--fondo);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
@@ -58,6 +58,7 @@
   display: flex;
   height: 44px;
   margin-bottom: 1em;
+  color:var(--texto);
 }
 
 .react-calendar__navigation button {

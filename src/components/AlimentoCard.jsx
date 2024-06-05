@@ -7,6 +7,7 @@ function AlimentoCard(props) {
   const handleAñadir = (e)=>{
     e.preventDefault();
     props.setArrAlimentos([...(props.arrAlimentos),props.alimento])
+    //console.log(props.arrAlimentos)
   }
   const handleQuitar = (e)=>{
     e.preventDefault()

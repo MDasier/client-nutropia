@@ -7,6 +7,7 @@ import BuscarCategoria from "../components/BuscarCategoria";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from "react-bootstrap/Button";
 
 function ListaAlimentos() {
   const [listaAlimentos, setListaAlimentos] = useState(null);
@@ -15,29 +16,45 @@ function ListaAlimentos() {
   const [hidratos, setHidratos] = useState(0);
   const [proteinas, setProteinas] = useState(0);
   const [calorias, setCalorias] = useState(0);
-
   
   const getAlimentos = async () => {
     const alimentos = await service.get("/alimentos");
     setListaAlimentos(alimentos.data);
   }
+/*arrAlimentos.map((infoAlimento) => {
+    setGrasas(grasas+parseInt(infoAlimento.grasas))
+    setHidratos(hidratos+parseInt(infoAlimento.HC))
+    setProteinas(proteinas+parseInt(infoAlimento.proteinas))
+    setCalorias(calorias+parseInt(infoAlimento.energiaKCAL))
+  })}*/
 
   const infoDieta = () => {    
-    {arrAlimentos.map((infoAlimento) => {
-      setGrasas(grasas+parseInt(infoAlimento.grasas))
-      setHidratos(hidratos+parseInt(infoAlimento.HC))
-      setProteinas(proteinas+parseInt(infoAlimento.proteinas))
-      setCalorias(calorias+parseInt(infoAlimento.energiaKCAL))
-    })}
+    const sumaGrasas = arrAlimentos.reduce((acumulador, alimento) => {
+      return acumulador + parseInt(alimento.grasas)
+    }, 0)//valor inicial '0'
+    setGrasas(sumaGrasas)
+
+    const sumaHidratos = arrAlimentos.reduce((acumulador, alimento) => {
+      return acumulador + parseInt(alimento.HC)
+    }, 0)//valor inicial '0'
+    setHidratos(sumaHidratos)
+
+    const sumaProteinas = arrAlimentos.reduce((acumulador, alimento) => {
+      return acumulador + parseInt(alimento.proteinas)
+    }, 0)//valor inicial '0'
+    setProteinas(sumaProteinas)
+
+    const sumaCalorias = arrAlimentos.reduce((acumulador, alimento) => {
+      return acumulador + parseInt(alimento.energiaKCAL)
+    }, 0)//valor inicial '0'
+    setCalorias(sumaCalorias)
+    
+    
   }
   useEffect(() => {    
-    getAlimentos()//!demasiadas llamadas
-    setGrasas(0)
-    setHidratos(0)
-    setProteinas(0)
-    setCalorias(0)
+    getAlimentos()  
     infoDieta()
-  }, [arrAlimentos.length])
+  }, [])
 
   if (listaAlimentos === null) {
     return <Spinner animation="border" role="status"></Spinner>;
@@ -82,6 +99,7 @@ function ListaAlimentos() {
 
       <Tab eventKey="resultados" title="RESULTADOS">      
         <ListGroup variant="flush">
+          <Button variant="success" size="sm" onClick={infoDieta}>Actualizar</Button>
           <ListGroup.Item>{"Total de grasas: "+grasas}</ListGroup.Item>
           <ListGroup.Item>{"Total de hidratos: "+hidratos}</ListGroup.Item>
           <ListGroup.Item>{"Total de proteínas: "+proteinas}</ListGroup.Item>

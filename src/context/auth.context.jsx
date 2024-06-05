@@ -87,10 +87,11 @@ function AuthWrapper(props) {
 
   const reloadInfo = async () => {
     try {
-      const info = await service.get(`/perfil/${loggedUserId}`)
-      setLoggedUserImage(info.data.imageUrl)
-      setLoggedUserName(info.data.username)
-      //console.log(info.data)
+      if(isLoggedIn){
+        const info = await service.get(`/perfil/${loggedUserId}`)
+        setLoggedUserImage(info.data.imageUrl)
+        setLoggedUserName(info.data.username)
+      }
     } catch (error) {
       //console.log(error)
     }

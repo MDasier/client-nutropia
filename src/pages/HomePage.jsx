@@ -19,14 +19,15 @@ function HomePage() {
   const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor} = useContext(AuthContext)
   const [datosUsuarioLogueado,setDatosUsuarioLogueado] = useState(null)
 
-
+  const getLoggedUserData = async()=>{
+    const loggedUserData = await service.get(`/perfil/${loggedUserId}`)
+    setDatosUsuarioLogueado(loggedUserData.data)
+  }
   useEffect(() =>{
-      const getLoggedUserData = async()=>{
-        const loggedUserData = await service.get(`/perfil/${loggedUserId}`)
-        setDatosUsuarioLogueado(loggedUserData.data)
-      }
+    if(isLoggedIn){
       getLoggedUserData()
       getNuevosMensajesParaPaciente()
+    }    
   },[])
 
   if(isLoggedIn&&datosUsuarioLogueado===null){
