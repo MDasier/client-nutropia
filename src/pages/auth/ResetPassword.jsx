@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/auth.context.jsx"
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -15,6 +16,7 @@ const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [controlVisible, setControlVisible] = useState(true);
   const [show, setShow] = useState(false);
+  const { isDarkTheme } = useContext(AuthContext)
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
   const handleSendPassword = async (e) => {
@@ -49,7 +51,7 @@ const ResetPassword = () => {
   return (
     <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">      
       <Form
-        data-bs-theme="light"
+        data-bs-theme={isDarkTheme}
         style={{
           borderRadius: "16px",
           padding: "32px",

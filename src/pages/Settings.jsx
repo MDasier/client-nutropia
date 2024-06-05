@@ -112,7 +112,7 @@ function Settings() {
           onChange={(e) => setIsDarkTheme(e.target.value)}
           style={{ fontWeight: fontWeigth, maxWidth: "400px" }}
         >
-          <option value="light" disabled>Por defecto 'Claro'</option>
+          <option value={fontWeigth} disabled>Por defecto 'Claro'</option>
           <option value="light">Claro</option>
           <option value="dark">Oscuro</option>
         </Form.Select>

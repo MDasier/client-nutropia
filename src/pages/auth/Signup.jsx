@@ -106,7 +106,7 @@ function Signup() {
         />
       </Form.Group>
 
-      <Form.Group controlId="password" className="mb-3">
+      <Form.Group controlId="password" className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Label>Contraseña*</Form.Label>
         <InputGroup hasValidation>
         <Form.Control
@@ -123,7 +123,7 @@ function Signup() {
         </InputGroup>
       </Form.Group>
 
-      <Form.Group className="mb-3">
+      <Form.Group className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Check
           required
           checked={isChecked}
@@ -146,8 +146,8 @@ function Signup() {
       centered
       scrollable="true"
       onEscapeKeyDown={handleClose}>
-        <Modal.Header style={{ display: "flex", justifyContent: "space-between" }}>
-          <Modal.Title >Términos y condiciones</Modal.Title>
+        <Modal.Header style={{ display: "flex", justifyContent: "space-between" }} data-bs-theme={isDarkTheme}  bg={isDarkTheme}>
+          <Modal.Title  style={isDarkTheme==="light"?{color:"black"}:{color:"white"}} data-bs-theme={isDarkTheme}>Términos y condiciones</Modal.Title>
           <button
             type="button"
             className="btn-close"
@@ -156,8 +156,8 @@ function Signup() {
             onClick={handleClose}
           ></button>
         </Modal.Header>
-        <Modal.Body >
-          <p>NUTROPIA no envía datos personales a terceros. Los datos son privados para uso exclusivo de nuestro personal en funciones de información personalizada y uso práctico como envio de información nutricional, planes nutricionales, dietas y demás información asociada a los usuarios.</p>
+        <Modal.Body data-bs-theme={isDarkTheme}>
+          <p style={isDarkTheme==="light"?{color:"black"}:{color:"white"}}>NUTROPIA no envía datos personales a terceros. Los datos son privados para uso exclusivo de nuestro personal en funciones de información personalizada y uso práctico como envio de información nutricional, planes nutricionales, dietas y demás información asociada a los usuarios.</p>
           <p>Para tener acceso completo, un administrador o un nutricionista debe darte permisos de usuario. Este proceso puede tardar un máximo de 24h.</p>
           <h6>¿Estás de acuerdo?</h6>
         </Modal.Body>
