@@ -10,7 +10,7 @@
 .react-calendar {
   width: 350px;
   max-width: 100%;
-  background: var(--fondo);
+  background-color: var(--fondo);
   border: 1px solid var(--fondo);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;

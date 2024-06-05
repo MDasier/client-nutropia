@@ -17,7 +17,7 @@ function MainNavbar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarColores } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarConfiguracion } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
@@ -36,7 +36,7 @@ function MainNavbar() {
   }
 
   return (
-    <Navbar expanded={expanded} expand="lg"  style={{backgroundColor:backgroundColor}}/*bg={isDarkTheme?"dark":"light"}*/ data-bs-theme={isDarkTheme} /*className="bg-body"*/ sticky="top">
+    <Navbar expanded={expanded} expand="lg" style={{backgroundColor:backgroundColor}} data-bs-theme={isDarkTheme} sticky="top">
     <Container>
       <Navbar.Brand onClick={handleShow}><img src={logo} width={"150px"} alt="logo" /></Navbar.Brand>
      
@@ -93,13 +93,13 @@ function MainNavbar() {
           :null}
 
         {!isLoggedIn && <>
-          <Dropdown.Item as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> 📝 Registro </Dropdown.Item>
-          <Dropdown.Item as={Link} to="/login" onClick={() => setExpanded(!expanded)}> 👤 Acceso </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/signup" onClick={handleClose}> 📝 Registro </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/login" onClick={handleClose}> 👤 Acceso </Dropdown.Item>
           </>}
 
 
       {isLoggedIn&&
-      <Dropdown.Item onClick={handleLogout}> Cerrar sesión <Dropdown.Divider /></Dropdown.Item>}
+      <Dropdown.Item onClick={handleLogout}> Cerrar sesión </Dropdown.Item>}
 
 <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de todos los estilos</Dropdown.Item>
         <h6>Estilos básicos:</h6>
@@ -126,7 +126,7 @@ function MainNavbar() {
       <Dropdown.Divider />
     </Dropdown>
     
-      <Button variant="success" onClick={guardarColores} style={{color:textColor}}>Guardar colores</Button>
+      <Button variant="success" onClick={guardarConfiguracion} style={{color:textColor}}>Guardar</Button>
 
       </Offcanvas.Body>
         

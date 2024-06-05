@@ -42,7 +42,7 @@ function UsuarioCard(props) {
         minHeight:"2rem",
         maxHeight:"4rem"
       }}
-      data-bs-theme={isDarkTheme ? "dark" : "light"}
+      data-bs-theme={isDarkTheme}
     >
       
       <Card.Body

@@ -73,9 +73,8 @@ function Perfil() {
     
     <div>
       <Form
-        data-bs-theme={isDarkTheme?"dark":"light"}
+        data-bs-theme={isDarkTheme}
         style={{
-        backgroundColor: isDarkTheme?"#303030":"whitesmoke",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",

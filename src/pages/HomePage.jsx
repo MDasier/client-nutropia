@@ -17,7 +17,7 @@ import maderaOscuraAncha from '../assets/images/maderaOscuraAncha.jpeg'
 
 function HomePage() {
 
-  const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor,fontWeigth} = useContext(AuthContext)
+  const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor,fontWeigth } = useContext(AuthContext)
   const [datosUsuarioLogueado,setDatosUsuarioLogueado] = useState(null)
 
   const getLoggedUserData = async()=>{
@@ -28,7 +28,9 @@ function HomePage() {
     if(isLoggedIn){
       getLoggedUserData()
       getNuevosMensajesParaPaciente()
-    }    
+    }else{
+      setDatosUsuarioLogueado([])
+    }
   },[])
 
   if(isLoggedIn&&datosUsuarioLogueado===null){
@@ -37,6 +39,10 @@ function HomePage() {
     );
   }
 
+  /*
+  EL CALENDARIO EN LA SECCION DE NUTRICIONISTA SALE DESPLAZADO A AL IZQUIERA
+  LA PAGINA NO CARGA LA HOME CORRECTAMENTE. FALTA REVISION
+  */
 
   return (
     <div style={{color:textColor,backgroundColor:backgroundColor, fontWeight:fontWeigth}} className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
@@ -81,7 +87,7 @@ function HomePage() {
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={maderaOscuraAncha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+      <img src={maderaOscuraAncha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.8"}}/>
         <Carousel.Caption>
           <h3 style={{color:textColor}}>Ensalada</h3>
           <p style={{color:textColor}}>
@@ -116,20 +122,20 @@ function HomePage() {
       
 
       {/*CONTENIDO EN FUNCION DEL ROLE */}
-      
         {/* nutricionistas */}
       {isNutri
       ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
         <h3>{isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}</h3>
-        <div  className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap"><h6>PROXIMA CONSULTA:<Citas role="nutri" /></h6> 
-        <Button as={Link} to="/agenda">IR A AGENDA</Button>
-        <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
 
-        <h6>Tienes {cantidadMensajesNuevos>0?cantidadMensajesNuevos:"0"} mensajes nuevos</h6>
-
-        <Button variant={cantidadMensajesNuevos===0?"light":"warning"} disabled={cantidadMensajesNuevos>0?false:true} as={Link} to={`/mensajes/${loggedUserId}`}>IR A MENSAJES</Button>{/* CARGAR COMPONENTE DE MENSAJES */}
+        <div  className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
+          <div><h6>PROXIMA CONSULTA:<Citas role="nutri" /></h6></div>
+          <Button as={Link} to="/agenda">IR A AGENDA</Button>
         </div>
-        </div>{/* CARGAR COMPONENTE AGENDA/CITA */}
+
+        <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
+          <h6>Tienes {cantidadMensajesNuevos>0?cantidadMensajesNuevos:"0"} mensajes nuevos</h6>
+          <Button variant={cantidadMensajesNuevos===0?"light":"warning"} disabled={cantidadMensajesNuevos>0?false:true} as={Link} to={`/mensajes/${loggedUserId}`}>IR A MENSAJES</Button>{/* CARGAR COMPONENTE DE MENSAJES */}
+        </div>
         
         {/*<Button>CREAR UN PLAN NUTRICIONAL</Button>{/* CARGAR COMPONENTE PLAN NUTRICIONAL }*/}
         <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">

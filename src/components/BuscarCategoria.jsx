@@ -37,7 +37,7 @@ function BuscarCategoria(props) {
 
   return (
     <div className="d-flex-r m-2 gap-2 justify-content-center align-items-center flex-wrap" >
-      <Form.Select data-bs-theme={isDarkTheme?"dark":"light"} aria-label="Default select example" onChange={(e) => setCategoria(e.target.value)}>
+      <Form.Select data-bs-theme={isDarkTheme} aria-label="Default select example" onChange={(e) => setCategoria(e.target.value)}>
       <option value=''>Mostrar todos los alimentos</option>
       <option value="lacteos">Lácteos</option>
       <option value="hortaliza-verdura">Hortalizas y verduras</option>
