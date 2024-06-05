@@ -10,10 +10,11 @@ import { Dropdown } from "react-bootstrap";
 import Badge from 'react-bootstrap/Badge';
 import { HexColorPicker } from "react-colorful";
 import { Button } from "react-bootstrap/esm";
+import Alert from 'react-bootstrap/Alert';
 
 function MainNavbar() {
   const [show, setShow] = useState(false);
-  const [hovered, setHovered] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -34,7 +35,19 @@ function MainNavbar() {
     await authenticateUser()
     navigate("/login")
   }
+  const showAlertyGuardar = async (e) => {
+    e.preventDefault();
+    setShowAlert(true)
+    guardarConfiguracion()
+    const delayAlert = setTimeout(() => {  
+      setShowAlert(false)
+      setShow(false)
+    }, 500)
 
+      return () => {
+        clearTimeout(delayAlert)
+      }
+  }
   return (
     <Navbar expanded={expanded} expand="lg" style={{backgroundColor:backgroundColor}} data-bs-theme={isDarkTheme} sticky="top">
     <Container>
@@ -126,12 +139,13 @@ function MainNavbar() {
       <Dropdown.Divider />
     </Dropdown>
     
-      <Button variant="success" onClick={guardarConfiguracion} style={{color:textColor}}>Guardar</Button>
-
+      <Button variant="success" onClick={showAlertyGuardar} style={{color:textColor}}>Guardar</Button>
+      <Alert variant="success" style={{width:"100%",alignContent:"center"}} show={showAlert}>
+        Colores guardados
+      </Alert>
       </Offcanvas.Body>
-        
+      
       </Offcanvas>
-
   </Navbar>  
  );
 }

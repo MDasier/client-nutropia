@@ -81,11 +81,11 @@ function Signup() {
       onSubmit={handleSignup}
     >
       <h6>Todos los campos son obligatorios</h6>
-      <Form.Group as={Col} controlId="email" className="mb-3" data-bs-theme={isDarkTheme}>
+      <Form.Group as={Col} controlId="username" className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Label>Email*</Form.Label>
         <Form.Control
           type="email"
-          name="email"
+          name="username"
           value={email}
           placeholder="Escribe tu email"
           required
@@ -94,13 +94,13 @@ function Signup() {
         <Form.Control.Feedback>Parece correcto!</Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group controlId="username" className="mb-3" data-bs-theme={isDarkTheme}>
+      <Form.Group controlId="user" className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Label>Nombre de usuario*</Form.Label>
         <Form.Control
           type="text"
-          name="username"
+          name="name"
           value={username}
-          placeholder="Escribe un nombre de usuario"
+          placeholder="Cookie Monster"
           required
           onChange={handleUsernameChange}
         />

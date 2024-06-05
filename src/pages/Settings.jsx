@@ -30,13 +30,13 @@ function Settings() {
     e.preventDefault();
     setShow(true)
     guardarConfiguracion()
-    const delayBusqueda = setTimeout(() => {  
+    const delayAlert = setTimeout(() => {  
       setShow(false)
-    }, 2500)
+      navigate('/')
+    }, 1500)
 
       return () => {
-        clearTimeout(delayBusqueda)
-        navigate(0)
+        clearTimeout(delayAlert)
       }
   }
 
@@ -122,7 +122,7 @@ function Settings() {
         Guardar
       </Button>
 
-      <Alert variant="info" style={{width:"100%",alignContent:"center"}} show={show}>
+      <Alert variant="succes" style={{width:"100%",alignContent:"center"}} show={show}>
         Configuración guardada correctamente
       </Alert>
       </Form>
