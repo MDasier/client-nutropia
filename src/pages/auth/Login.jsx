@@ -43,7 +43,7 @@ function Login() {
   return (
     <div>
       <Form
-        data-bs-theme={isDarkTheme?"dark":"light"}
+        data-bs-theme="light"
         style={{
         backgroundColor: isDarkTheme?"#303030":"whitesmoke",
         borderRadius: "16px",
@@ -79,7 +79,7 @@ function Login() {
 
       <Button type="submit"> Acceder </Button>
       {errorMessage && <p>{errorMessage}</p>}
-      <Form.Label as={Link} to="/forget">Recuperar contraseña</Form.Label>
+      <Form.Label as={Link} to="/forget">He olvidado mi contraseña</Form.Label>
     </Form>
       
     </div>
