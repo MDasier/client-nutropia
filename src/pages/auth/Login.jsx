@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/auth.context";
 import service from "../../services/config.services";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import InputGroup from 'react-bootstrap/InputGroup';
 
 function Login() {
 
@@ -12,6 +13,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [controlVisible, setControlVisible] = useState(true);
   const [errorMessage, setErrorMessage] = useState("")
 
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -41,11 +43,10 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       <Form
-        data-bs-theme="light"
+        data-bs-theme={isDarkTheme}
         style={{
-        backgroundColor: isDarkTheme?"#303030":"whitesmoke",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",
@@ -54,9 +55,11 @@ function Login() {
       }}
       onSubmit={handleLogin}
     >
-      <Form.Group controlId="email" className="mb-3">
-        <Form.Label>Email*</Form.Label>
+      <Form.Group controlId="email" className="mb-3" data-bs-theme={isDarkTheme}>
+        <Form.Label bg={isDarkTheme} data-bs-theme={isDarkTheme}>Email*</Form.Label>
         <Form.Control
+          data-bs-theme={isDarkTheme}
+          bg={isDarkTheme}
           type="email"
           name="email"
           value={email}
@@ -65,16 +68,22 @@ function Login() {
           onChange={handleEmailChange}
         />
       </Form.Group>
-      <Form.Group controlId="password" className="mb-3">
+
+      <Form.Group controlId="password" className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Label>Contraseña*</Form.Label>
+        <InputGroup hasValidation>
         <Form.Control
-          type="password"
+          type={controlVisible?"password":"text"}
           name="password"
           value={password}
-          placeholder="Escribe tu contraseña"
+          placeholder="Escribe una contraseña"
           required
           onChange={handlePasswordChange}
         />
+        <InputGroup.Text as={Button} onClick={()=>setControlVisible(!controlVisible)} variant={controlVisible?"light":"dark"}>
+          👁️‍🗨️
+        </InputGroup.Text>
+        </InputGroup>
       </Form.Group>
 
       <Button type="submit"> Acceder </Button>

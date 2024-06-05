@@ -47,8 +47,7 @@ const ResetPassword = () => {
         </ToastContainer>*/
   };
   return (
-    <>
-      <h6>Nueva contraseña:</h6>
+    <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">      
       <Form
         data-bs-theme="light"
         style={{
@@ -62,8 +61,8 @@ const ResetPassword = () => {
         }}
         onSubmit={handleSendPassword}
       >
-        <InputGroup hasValidation>
-          
+        <h6>Nueva contraseña:</h6>
+        <InputGroup hasValidation>          
           <Form.Control
             type={controlVisible?"password":"text"}
             name="password"
@@ -82,7 +81,7 @@ const ResetPassword = () => {
           {mensajeRespuesta}
         </Alert>
       </Form>
-    </>
+    </div>
   );
 };
 

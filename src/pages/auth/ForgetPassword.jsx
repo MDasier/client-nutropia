@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context.jsx"
 import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import Alert from 'react-bootstrap/Alert';
-import { useNavigate } from "react-router-dom";
 
 const ForgetPassword = () => {
 
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
+  const { isDarkTheme } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -38,10 +40,9 @@ const ForgetPassword = () => {
 
   };
   return (
-    <>
-      <h6>Proceso de recuperación de contraseña:</h6>
+    <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
       <Form
-        data-bs-theme="light"
+        data-bs-theme={isDarkTheme}
         style={{
         borderRadius: "16px",
         padding: "32px",
@@ -51,6 +52,7 @@ const ForgetPassword = () => {
       }}
       onSubmit={handleSendEmail}
     >
+      <h6>Proceso de recuperación de contraseña:</h6>
       <Form.Group controlId="email" className="mb-3">
         <Form.Control
           type="email"
@@ -68,7 +70,7 @@ const ForgetPassword = () => {
       </Alert>
     </Form>
     
-    </>
+    </div>
   );
 };
 

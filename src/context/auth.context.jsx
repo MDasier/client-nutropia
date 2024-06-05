@@ -6,9 +6,14 @@ import { Spinner } from "react-bootstrap/esm";
 const AuthContext = createContext()
 
 function AuthWrapper(props) {
-  //theme
-  const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("colorFondo") || "#ffffff")//state para color de fondo
-  const [textColor, setTextColor] = useState(localStorage.getItem("colorTexto") || "#000000")//state para color de texto
+  //InputsTheme
+  const [ isDarkTheme, setIsDarkTheme ] = useState(localStorage.getItem("isDarkTheme") || "light")
+  //state para color de fondo
+  const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("colorFondo") || "#ffffff")
+  //state para color de texto
+  const [textColor, setTextColor] = useState(localStorage.getItem("colorTexto") || "#000000")
+  //fontWeigth
+  const [fontWeigth, setFontWeigth] = useState(localStorage.getItem("fontWeigth") || "400")
 
   //Datos
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
@@ -16,7 +21,7 @@ function AuthWrapper(props) {
   const [ loggedUserId, setLoggedUserId ] = useState(null)
   const [ loggedUserImage, setLoggedUserImage ] = useState(null)
   const [ loggedUserName, setLoggedUserName ] = useState(null)
-
+ 
   //Roles
   const [ isAdmin, setIsAdmin] = useState(false)
   const [ isNutri, setIsNutri] = useState(false)
@@ -25,9 +30,11 @@ function AuthWrapper(props) {
   const [cantidadMensajesNuevos,setCantidadMensajesNuevos] = useState(0)
 
   //funciones
-  const guardarColores = ()=>{
+  const guardarConfiguracion = ()=>{
     localStorage.setItem("colorFondo",backgroundColor)
     localStorage.setItem("colorTexto",textColor)
+    localStorage.setItem("fontWeigth",fontWeigth)
+    localStorage.setItem("isDarkTheme",isDarkTheme)
   }
   const getNuevosMensajesParaPaciente = async()=>{
     if(isLoggedIn){
@@ -110,11 +117,15 @@ function AuthWrapper(props) {
     isNutri,
     isPaciente,
     isAdmin,
+    isDarkTheme,
+    setIsDarkTheme,
     backgroundColor,
     setBackgroundColor,
     textColor,
     setTextColor,
-    guardarColores
+    fontWeigth,
+    setFontWeigth,
+    guardarConfiguracion
   }
 
   useEffect(() => {

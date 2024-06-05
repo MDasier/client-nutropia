@@ -13,7 +13,7 @@ import { Button } from "react-bootstrap/esm";
 
 function MainNavbar() {
   const [show, setShow] = useState(false);
-
+  const [hovered, setHovered] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -36,7 +36,7 @@ function MainNavbar() {
   }
 
   return (
-    <Navbar expanded={expanded} expand="lg"  style={{backgroundColor:backgroundColor}}/*bg={isDarkTheme?"dark":"light"}*/ data-bs-theme={isDarkTheme?"dark":"light"} /*className="bg-body"*/ sticky="top">
+    <Navbar expanded={expanded} expand="lg"  style={{backgroundColor:backgroundColor}}/*bg={isDarkTheme?"dark":"light"}*/ data-bs-theme={isDarkTheme} /*className="bg-body"*/ sticky="top">
     <Container>
       <Navbar.Brand onClick={handleShow}><img src={logo} width={"150px"} alt="logo" /></Navbar.Brand>
      
@@ -67,7 +67,7 @@ function MainNavbar() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item as={Link} to={`/`}>Inicio</Dropdown.Item>
+        <Dropdown.Item as={Link} to={`/`} >Inicio</Dropdown.Item>
         <Dropdown.Item as={Link} to={`/login`}>Entrar</Dropdown.Item>
         <Dropdown.Item as={Link} to={`/signup`}>Registrarse</Dropdown.Item>
       </Dropdown.Menu>
@@ -75,13 +75,13 @@ function MainNavbar() {
       </div>}
     </Container>
     
-    <Offcanvas show={show} onHide={handleClose} /*responsive="xl"*/ /*style={{width:"50%"}}*/>
+    <Offcanvas show={show} onHide={handleClose} /*responsive="xl"*/>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Opciones</Offcanvas.Title>
+          <Offcanvas.Title>⚙️ Opciones generales</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>  
-        <Dropdown.Item as={Link} to="/" onClick={handleClose}>Inicio</Dropdown.Item>     
-        <Dropdown.Item as={Link} to="/alimentos" onClick={handleClose}>Info alimentos</Dropdown.Item>    
+        <Offcanvas.Body>       
+        <Dropdown.Item as={Link} to="/" onClick={handleClose}> 🏠 Inicio </Dropdown.Item>     
+        <Dropdown.Item as={Link} to="/alimentos" onClick={handleClose}> 🥕 Info alimentos</Dropdown.Item>    
           
           {isLoggedIn&&<Dropdown.Item as={Link} to="/agenda" onClick={handleClose}>Agenda</Dropdown.Item>}
           {isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}>Mensajes</Dropdown.Item>}
@@ -93,8 +93,8 @@ function MainNavbar() {
           :null}
 
         {!isLoggedIn && <>
-          <Dropdown.Item as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> Registro </Dropdown.Item>
-          <Dropdown.Item as={Link} to="/login" onClick={() => setExpanded(!expanded)}> Acceso </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/signup" onClick={() => setExpanded(!expanded)}> 📝 Registro </Dropdown.Item>
+          <Dropdown.Item as={Link} to="/login" onClick={() => setExpanded(!expanded)}> 👤 Acceso </Dropdown.Item>
           </>}
 
 
@@ -103,7 +103,7 @@ function MainNavbar() {
 
     <Dropdown drop="down">
       <Dropdown.Toggle variant="light" id="dropdown-fondo">
-        <h6>Cambiar color de fondo ⬇</h6>
+        <h6>🪣 Cambiar color de fondo ⬇</h6>
       </Dropdown.Toggle>
     
       <Dropdown.Menu>
@@ -113,7 +113,7 @@ function MainNavbar() {
 
     <Dropdown drop="down">
       <Dropdown.Toggle variant="light" id="dropdown-texto">
-        <h6>Cambiar color de texto ⬇</h6>
+        <h6>🖌️ Cambiar color de texto ⬇</h6>
       </Dropdown.Toggle>
     
       <Dropdown.Menu>
@@ -122,9 +122,13 @@ function MainNavbar() {
       <Dropdown.Divider />
     </Dropdown>
     
-      <Button /*as={Button}*/ variant="success" onClick={guardarColores}>Guardar colores</Button>
-        </Offcanvas.Body>
+      <Button variant="success" onClick={guardarColores}>Guardar colores</Button>
+      <br />
+      <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de todos los estilos</Dropdown.Item>
+      </Offcanvas.Body>
+        
       </Offcanvas>
+
   </Navbar>  
  );
 }

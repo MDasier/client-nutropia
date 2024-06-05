@@ -17,6 +17,7 @@ function Signup() {
   const [validated, setValidated] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [controlVisible, setControlVisible] = useState(true);
   const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -64,13 +65,12 @@ function Signup() {
   };
 
   return (
-    <div>
-        <h6>Todos los campos son obligatorios</h6>
+    <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
+        
       
     <Form
-        data-bs-theme={isDarkTheme?"dark":"light"}
+        data-bs-theme={isDarkTheme}
         style={{
-        backgroundColor: isDarkTheme?"#303030":"whitesmoke",
         borderRadius: "16px",
         padding: "32px",
         display: "flex",
@@ -80,7 +80,8 @@ function Signup() {
       noValidate validated={validated}
       onSubmit={handleSignup}
     >
-      <Form.Group as={Col} controlId="email" className="mb-3">
+      <h6>Todos los campos son obligatorios</h6>
+      <Form.Group as={Col} controlId="email" className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Label>Email*</Form.Label>
         <Form.Control
           type="email"
@@ -93,7 +94,7 @@ function Signup() {
         <Form.Control.Feedback>Parece correcto!</Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group controlId="username" className="mb-3">
+      <Form.Group controlId="username" className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Label>Nombre de usuario*</Form.Label>
         <Form.Control
           type="text"
@@ -107,15 +108,21 @@ function Signup() {
 
       <Form.Group controlId="password" className="mb-3">
         <Form.Label>Contraseña*</Form.Label>
+        <InputGroup hasValidation>
         <Form.Control
-          type="password"
+          type={controlVisible?"password":"text"}
           name="password"
           value={password}
           placeholder="Escribe una contraseña"
           required
           onChange={handlePasswordChange}
         />
+        <InputGroup.Text as={Button} onClick={()=>setControlVisible(!controlVisible)} variant={controlVisible?"light":"dark"}>
+          👁️‍🗨️
+        </InputGroup.Text>
+        </InputGroup>
       </Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Check
           required
@@ -132,7 +139,7 @@ function Signup() {
       {errorMessage && <p>{errorMessage}</p>}
 
       {/* MODAL */}
-      <Modal  data-bs-theme={isDarkTheme?"dark":"light"}
+      <Modal  data-bs-theme={isDarkTheme}
       show={show}
       size="lg"
       fullscreen="sm-down"
@@ -140,7 +147,7 @@ function Signup() {
       scrollable="true"
       onEscapeKeyDown={handleClose}>
         <Modal.Header style={{ display: "flex", justifyContent: "space-between" }}>
-          <Modal.Title  style={{color:isDarkTheme?"#fff":"#212529"}}>Términos y condiciones</Modal.Title>
+          <Modal.Title >Términos y condiciones</Modal.Title>
           <button
             type="button"
             className="btn-close"
@@ -149,8 +156,9 @@ function Signup() {
             onClick={handleClose}
           ></button>
         </Modal.Header>
-        <Modal.Body  style={{color:isDarkTheme?"#fff":"#212529"}}>
+        <Modal.Body >
           <p>NUTROPIA no envía datos personales a terceros. Los datos son privados para uso exclusivo de nuestro personal en funciones de información personalizada y uso práctico como envio de información nutricional, planes nutricionales, dietas y demás información asociada a los usuarios.</p>
+          <p>Para tener acceso completo, un administrador o un nutricionista debe darte permisos de usuario. Este proceso puede tardar un máximo de 24h.</p>
           <h6>¿Estás de acuerdo?</h6>
         </Modal.Body>
         <Modal.Footer>

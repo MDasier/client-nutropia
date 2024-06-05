@@ -35,7 +35,7 @@ const handleFileUpload = async (event) => {
 };
   return (
     <div>
-      <Form.Group controlId="imageUrl" className="mb-3">
+      <Form.Group controlId="imageUrl" className="mb-3" data-bs-theme={isDarkTheme}>
         <Form.Label>Selecciona una imagen: 
         </Form.Label>
         <Form.Control

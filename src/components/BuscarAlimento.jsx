@@ -28,7 +28,7 @@ function BuscarAlimento(props) {
   return (
     <div className="d-flex-r m-2 gap-2 justify-content-center align-items-center flex-wrap" >
       <Form.Control
-          data-bs-theme={isDarkTheme?"dark":"light"}
+          data-bs-theme="light"
           type="text"
           placeholder="Buscar alimento...🔍"
           onChange={(e) => setBusqueda(e.target.value)}

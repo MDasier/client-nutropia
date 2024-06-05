@@ -7,16 +7,17 @@ import { Button, Spinner } from "react-bootstrap";
 import Citas from "../components/Citas";
 //galeria de fotos de prueba
 import Carousel from 'react-bootstrap/Carousel';
-import logopeque from '../assets/images/logopeque.png'
+//import logopeque from '../assets/images/logopeque.png'
 import ensalada from '../assets/images/ensalada.jpeg'
 import panDerecha from '../assets/images/panDerecha.jpeg'
 import panIzquierda from '../assets/images/panIzquierda.jpeg'
 import maderaOscuraAncha from '../assets/images/maderaOscuraAncha.jpeg'
 
 
+
 function HomePage() {
 
-  const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor} = useContext(AuthContext)
+  const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor,fontWeigth} = useContext(AuthContext)
   const [datosUsuarioLogueado,setDatosUsuarioLogueado] = useState(null)
 
   const getLoggedUserData = async()=>{
@@ -38,49 +39,52 @@ function HomePage() {
 
 
   return (
-    <div style={{color:textColor,backgroundColor:backgroundColor}} className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
+    <div style={{color:textColor,backgroundColor:backgroundColor, fontWeight:fontWeigth}} className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
   <Carousel className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
-      <Carousel.Item>
-       <img src={logopeque} text="slide1" height={"100%"} style={{maxWidth:"800px",minHeight:"530px"}}/>
 
+      <Carousel.Item>
+      <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
         <Carousel.Caption>
-          <h3 style={{color:"black"}}>Conoce nutropia, tu app para organizar tu consulta de nutrición.</h3>
+          <h3 style={{color:textColor}}>NUTROPIA</h3>
+          <p style={{color:textColor}}>
+            Nuestra aplicación web ha sido diseñada para gestionar tu consulta de nutrición. Entra y descúbrela!
+          </p>
         </Carousel.Caption>
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={ensalada} text="slide2" width={"100%"} style={{maxWidth:"800px"}}/>
+      <img src={ensalada} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
         <Carousel.Caption>
-          <h3 style={{color:"black"}}>Verduras y quinoa</h3>
-          <p style={{color:"black"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3 style={{color:textColor}}>Verduras y quinoa</h3>
+          <p style={{color:textColor}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={panDerecha} text="slide3" width={"100%"} style={{maxWidth:"800px"}}/>
+      <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
         <Carousel.Caption>
-          <h3 style={{color:"black"}}>Tostas</h3>
-          <p style={{color:"black"}}>
+          <h3 style={{color:textColor}}>Tostas</h3>
+          <p style={{color:textColor}}>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>
         </Carousel.Caption>
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={panIzquierda} text="slide3" width={"100%"} style={{maxWidth:"800px"}}/>
+      <img src={panIzquierda} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
         <Carousel.Caption>
-          <h3 style={{color:"black"}}>Sándwiches</h3>
-          <p style={{color:"black"}}>
+          <h3 style={{color:textColor}}>Sándwiches</h3>
+          <p style={{color:textColor}}>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>
         </Carousel.Caption>
       </Carousel.Item>
 
       <Carousel.Item>
-      <img src={maderaOscuraAncha} text="slide3" width={"100%"} style={{maxWidth:"800px"}}/>
+      <img src={maderaOscuraAncha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
         <Carousel.Caption>
-          <h3 style={{color:"white"}}>Ensalada</h3>
-          <p style={{color:"white"}}>
+          <h3 style={{color:textColor}}>Ensalada</h3>
+          <p style={{color:textColor}}>
             Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>
         </Carousel.Caption>
@@ -89,7 +93,7 @@ function HomePage() {
 
       {/* CONTENIDO PUBLICO */}
       {!isLoggedIn&&
-      <div>
+      <div style={{fontWeight:fontWeigth}}>
         <p>
           Necesitas registrarte o iniciar sesión para usar la app. Hecha un
           vistazo a unas recetas saludables mientras te lo piensas!{" "}
