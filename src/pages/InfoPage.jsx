@@ -1,7 +1,12 @@
+import { useContext} from "react";
+import { AuthContext } from "../context/auth.context";
 
 function InfoPage() {
+  
+  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, setLoggedUserImage, isAdmin, isNutri, isPaciente, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarConfiguracion } = useContext(AuthContext)
+
   return (
-    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
+    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap"  style={{backgroundColor:backgroundColor,color:textColor}}>
         <h3>NUTROPIA - INFO.</h3>
         <hr />
         <h5>La idea era crear una app web para una consulta de nutrición. Esto es lo que se ha conseguido...</h5>

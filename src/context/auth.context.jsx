@@ -98,11 +98,11 @@ function AuthWrapper(props) {
 
   const reloadInfo = async () => {
     try {
-      if(isLoggedIn){
+      if(loggedUserId!==null){
         const info = await service.get(`/perfil/${loggedUserId}`)
         setLoggedUserImage(info.data.imageUrl)
         setLoggedUserName(info.data.username)
-        setCantidadMensajesNuevos()
+        getNuevosMensajesParaPaciente()
       }
     } catch (error) {
       //console.log(error)
@@ -123,6 +123,7 @@ function AuthWrapper(props) {
     isNutri,
     isPaciente,
     isAdmin,
+    isAuthenticating,
     roleControlUsuarios,
     isDarkTheme,
     setIsDarkTheme,
@@ -136,12 +137,12 @@ function AuthWrapper(props) {
   }
 
   useEffect(() => {
-    authenticateUser()
+
+    authenticateUser()        
     getNuevosMensajesParaPaciente()
-    reloadInfo()
 
     document.documentElement.style.setProperty('--fondo', backgroundColor);
-    root.style.setProperty("--fondo", backgroundColor);    
+    root.style.setProperty("--fondo", backgroundColor);
 
   }, [backgroundColor])
 

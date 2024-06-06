@@ -1,8 +1,12 @@
 import Card from "react-bootstrap/Card";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/Button";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 function AlimentoCard(props) {
+
+  const { isDarkTheme, backgroundColor, textColor } = useContext(AuthContext)
 
   const handleAñadir = (e)=>{
     e.preventDefault();
@@ -30,14 +34,14 @@ function AlimentoCard(props) {
         maxWidth: "500px",
         minHeight:"2rem"
       }}
-      data-bs-theme="light"
+      data-bs-theme={isDarkTheme}
       
     >
       <Card.Header style={{display:"flex",justifyContent:"space-between"}}>
       <Card.Title>
         {props.alimento.nombre.toUpperCase()}
         </Card.Title>
-        {props.arr?<Button variant="secondary" size="sm" onClick={handleQuitar}>-</Button>:<Button variant="secondary" size="sm" onClick={handleAñadir}>+</Button>}
+        {props.arr?<Button variant="danger" size="sm" onClick={handleQuitar}>Borrar</Button>:<Button variant="success" size="sm" onClick={handleAñadir}>Añadir</Button>}
         
       </Card.Header>
 

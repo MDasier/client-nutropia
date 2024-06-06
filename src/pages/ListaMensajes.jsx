@@ -20,13 +20,14 @@ function ListaMensajes() {
     }
   };
   const marcarComoLeido = async(id) => {
-    //console.log(id)
+
     try {
         await service.patch(`/mensajes/mensaje-leido`,{id:id})
     } catch (error) {
         //console.log(error)
     }
     getNuevosMensajesParaPaciente()
+    
   }
 
   useEffect(() => {

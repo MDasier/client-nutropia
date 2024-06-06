@@ -49,7 +49,7 @@ function App() {
         <Route path="/nuevo-mensaje/:pacienteId" element={<PrivateContent><EnviarMensaje/></PrivateContent>} />
         <Route path="/pacientes/:pacienteId" element={<PrivateContent><DetallesPaciente/></PrivateContent>} />
 
-        <Route path="/server-error" element={<NotFound />}/>
+        <Route path="/server-error" element={<NotFound />/* debería crear una página para 'server-error' */}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

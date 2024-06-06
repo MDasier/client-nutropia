@@ -34,15 +34,14 @@ function Citas(props) {
     if(citas===null){
         return <Spinner animation="border" role="status"></Spinner>
     }
-  return (
-    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
-        
+  return (<>
+    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap" style={{display:"flex",flexDirection:"row"}}>
       <Calendar defaultActiveStartDate={new Date()} /*onChange={setFecha}*/ value={fecha} className="react-calendar"/>
-      <p style={{margin:"40px"}}>{consulta===""?"Agenda vacía":"A las "+consulta}</p>
-        {/*citas.map((eachCita)=>{
-            return <p key={eachCita._id}>{eachCita.fecha}</p>
-        })*/}
     </div>
+    <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap" style={{display:"flex",flexDirection:"row"}}>        
+      <p style={{margin:"40px"}}>{consulta===""?"Agenda vacía":"A las "+consulta}</p>
+    </div>
+    </>
   )
 }
 

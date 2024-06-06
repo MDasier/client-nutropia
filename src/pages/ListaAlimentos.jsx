@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import service from "../services/config.services";
 import { Spinner } from "react-bootstrap/esm";
 import AlimentoCard from "../components/AlimentoCard";
@@ -8,8 +8,10 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/Button";
+import { AuthContext } from "../context/auth.context";
 
 function ListaAlimentos() {
+  const { isDarkTheme } = useContext(AuthContext)
   const [listaAlimentos, setListaAlimentos] = useState(null);
   const [arrAlimentos, setArrAlimentos] = useState([]);
   const [grasas, setGrasas] = useState(0);
@@ -68,7 +70,9 @@ function ListaAlimentos() {
       <Tabs
         defaultActiveKey="lista"
         id="uncontrolled-tab-example"
-        className="mb-3">
+        className="mb-3"
+        data-bs-theme={isDarkTheme}
+        >
 
       <Tab eventKey="lista" title="LISTA DE ALIEMENTOS COMPLETA">
       <div
@@ -98,7 +102,7 @@ function ListaAlimentos() {
       </Tab>
 
       <Tab eventKey="resultados" title="RESULTADOS">      
-        <ListGroup variant="flush">
+        <ListGroup variant="flush" data-bs-theme={isDarkTheme}>
           <Button variant="success" size="sm" onClick={infoDieta}>Actualizar</Button>
           <ListGroup.Item>{"Total de grasas: "+grasas}</ListGroup.Item>
           <ListGroup.Item>{"Total de hidratos: "+hidratos}</ListGroup.Item>

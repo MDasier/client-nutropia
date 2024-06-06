@@ -13,20 +13,21 @@ import panDerecha from '../assets/images/panDerecha.jpeg'
 import panIzquierda from '../assets/images/panIzquierda.jpeg'
 import maderaOscuraAncha from '../assets/images/maderaOscuraAncha.jpeg'
 
-
-
 function HomePage() {
 
-  const { isLoggedIn, loggedUserId, isAdmin, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor,fontWeigth } = useContext(AuthContext)
+  const { isLoggedIn, loggedUserId, isAdmin, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor,fontWeigth,reloadInfo,isAuthenticating } = useContext(AuthContext)
   const [datosUsuarioLogueado,setDatosUsuarioLogueado] = useState(null)
 
   const getLoggedUserData = async()=>{
     const loggedUserData = await service.get(`/perfil/${loggedUserId}`)
     setDatosUsuarioLogueado(loggedUserData.data)
   }
+
   useEffect(() =>{
-    
-    if(isLoggedIn){
+
+    reloadInfo()
+
+    if(isLoggedIn){      
       getLoggedUserData()
       getNuevosMensajesParaPaciente()
     }else{
@@ -35,18 +36,16 @@ function HomePage() {
 
   },[])
 
-  if(isLoggedIn&&datosUsuarioLogueado===null){
+  if(datosUsuarioLogueado===null){
     return (
       <Spinner animation="border" role="status"></Spinner>
     )
   }
-  if(datosUsuarioLogueado){
+  if(datosUsuarioLogueado!==null){
     getNuevosMensajesParaPaciente()
   }
 
   /*
-  EL CALENDARIO EN LA SECCION DE NUTRICIONISTA SALE DESPLAZADO A AL IZQUIERA
-  LA PAGINA NO CARGA LA HOME CORRECTAMENTE. FALTA REVISION
   PARA LAS IMAGENES PODRIAMOS USAR 'npm i react-image-holder' Y PONER HOLDER.JS MIENTRAS CARGAN LAS IMAGENES REALES
   */
 
@@ -137,7 +136,7 @@ function HomePage() {
         <h3>{isLoggedIn&&`Hola ${datosUsuarioLogueado.username}! `}</h3>
 
         <div  className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
-          <div><h6>PROXIMA CONSULTA:<Citas role="nutri" /></h6></div>
+          <div><h6>PROXIMA CONSULTA:</h6></div><Citas role="nutri" />
           <Button as={Link} to="/agenda">IR A AGENDA</Button>
         </div>
 

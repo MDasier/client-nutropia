@@ -7,6 +7,11 @@
   background-color: var(--fondo);
   min-height: 100vh;
 }
+.dropdown-item:hover {
+  background-color:var(--texto);
+  color: var(--fondo);
+}
+/*REACT CALENDAR*/
 .react-calendar {
   width: 350px;
   max-width: 100%;
@@ -169,6 +174,9 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
 }
+
+
+/*MENU OFFCANVAS - DESPLEGABLE DE LA IZQ*/
 .offcanvas-header{
   background-color: var(--fondo);
   color: var(--texto);

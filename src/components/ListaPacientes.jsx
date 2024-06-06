@@ -8,16 +8,16 @@ function ListaPacientes() {
   const [listaPacientes, setListaPacientes] = useState(null);
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const cargaPacientes = async () => {
-      try {
-        const response = await service.get("/auth/pacientes");
-        setListaPacientes(response.data);
-      } catch (error) {
-        navigate("/server-error")
-      }
-    };
-  
+  const cargaPacientes = async () => {
+    try {
+      const response = await service.get("/auth/pacientes");
+      setListaPacientes(response.data);
+    } catch (error) {
+      navigate("/server-error")
+    }
+  };
+
+  useEffect(() => {  
     cargaPacientes();
   }, []);
 
@@ -27,9 +27,14 @@ function ListaPacientes() {
     );
   }
 
-  return <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">{listaPacientes.map((paciente)=>{
-    return <PacienteCard key={paciente._id} paciente={paciente} />
-  })}</div>;
+  return (
+  <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap" style={{display:"flex",flexDirection:"column"}}>
+    {listaPacientes.map((paciente)=>{
+      return <PacienteCard key={paciente._id} paciente={paciente} />
+    })}
+    
+  </div>
+)
 }
 
 export default ListaPacientes;
