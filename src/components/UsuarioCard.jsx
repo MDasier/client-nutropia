@@ -5,12 +5,15 @@ import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 import service from "../services/config.services";
 import { CardText } from "react-bootstrap";
+import { CardHeader } from "react-bootstrap/esm";
 
 function UsuarioCard(props) {
   const navigate = useNavigate();
   const {
     isLoggedIn,
     isDarkTheme,
+    isAdmin,
+    isNutri,
   } = useContext(AuthContext);
 
   const handleRolePaciente = async (e) => {
@@ -31,58 +34,69 @@ function UsuarioCard(props) {
       navigate("/server-error");
     }
   };
+  const handleRoleNutri = async (e) => {
+    e.preventDefault();
+    try {
+      await service.patch(`/usuarios/${props.usuario._id}/nutricionista`);
+      navigate("/");
+    } catch (error) {
+      navigate("/server-error");
+    }
+  };
 
   return (
     <Card
       style={{
         display: "flex",
-        flexDirection: "row",
-        width: "10rem",
-        minWidth: "fit-content",
-        minHeight:"2rem",
-        maxHeight:"4rem"
+        flexDirection: "column",
+        maxWidth:"100%",
+        minHeight:"150px"
       }}
       data-bs-theme={isDarkTheme}
     >
-      
+      <Card.Header>
+        {props.usuario.username.toUpperCase()}{" : "+ props.usuario.role}
+      </Card.Header>
       <Card.Body
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "center",
+          justifyContent: "start",
           gap:"2px",
           alignItems: "center",
           scrollbarWidth: "none",
-          overflowY: "scroll",
-          maxHeight: "fit-content"
+          overflowY: "scroll"
         }}
       >
-        <Card.Title
-        style={{ width: "5rem",fontSize:"0.5em"}}
-      >
-        {props.usuario.username.toUpperCase()}
-      </Card.Title>
-      
-        <CardText style={{ width: "5rem", height: "3rem"}}>
-          {"Role: "+ props.usuario.role}
-        </CardText>
 
         <Button
-          style={{ width: "5rem", height: "3rem", fontSize: "0.7rem" }}
-          variant="primary"
+          style={{ width: "100px", height:"80px", fontSize: "0.7rem" }}
+          variant="success"
+          disabled={!isAdmin}
+          onClick={handleRoleNutri}
+        >
+          Dar permisos de nutricionita
+        </Button>
+
+        <Button
+          style={{ width: "100px", height:"80px", fontSize: "0.7rem" }}
+          variant="success"
           disabled={!isLoggedIn}
           onClick={handleRolePaciente}
         >
-          Añadir paciente
+          {isNutri?"Aceptar paciente":"Dar permisos de usuario"}
         </Button>
+
         <Button
-          style={{ width: "5rem", height: "3rem", fontSize: "0.7rem" }}
-          variant="primary"
+          style={{ width: "100px", height:"80px", fontSize: "0.7rem" }}
+          variant="danger"
           disabled={!isLoggedIn}
           onClick={handleRoleInvitado}
         >
-          Borrar paciente
+          {isNutri?"Borrar paciente":"Borrar permisos"}
         </Button>
+
+
       </Card.Body>
     </Card>
   );

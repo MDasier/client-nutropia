@@ -9,7 +9,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Dropdown } from "react-bootstrap";
 import Badge from 'react-bootstrap/Badge';
 import { HexColorPicker } from "react-colorful";
-import { Anchor, Button } from "react-bootstrap/esm";
+import { Button } from "react-bootstrap/esm";
 import Alert from 'react-bootstrap/Alert';
 
 function MainNavbar() {
@@ -23,9 +23,9 @@ function MainNavbar() {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    authenticateUser()
-    reloadInfo()
-    getNuevosMensajesParaPaciente()
+    //authenticateUser()
+    //reloadInfo()
+    //getNuevosMensajesParaPaciente()
   },[])
 
   const handleLogout = async () => {
@@ -101,9 +101,9 @@ function MainNavbar() {
           {isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}> ✉️ Mensajes</Dropdown.Item>}
 
         {isNutri ? 
-          <><Dropdown.Item as={Link} to="/control-pacientes" onClick={handleClose}>Control pacientes</Dropdown.Item></>
+          <><Dropdown.Item as={Link} to="/control-pacientes" onClick={handleClose}> 👥 Control pacientes</Dropdown.Item></>
           :isAdmin ?
-          <><Dropdown.Item as={Link} to="/control-usuarios" onClick={() => setExpanded(!expanded)}>Control usuarios</Dropdown.Item></>
+          <><Dropdown.Item as={Link} to="/control-pacientes" onClick={handleClose}/*onClick={() => setExpanded(!expanded)}*/>👥 Control usuarios</Dropdown.Item></>
           :null}
 
         {!isLoggedIn && <>
@@ -116,7 +116,7 @@ function MainNavbar() {
       <Dropdown.Item onClick={handleLogout}>🔓 Cerrar sesión </Dropdown.Item>}
 
     <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de estilos</Dropdown.Item>
-<div style={{height:"5%",backgroundColor:"#cdcdcd"}}><h6>Otras opciones y enlaces</h6><hr /></div>
+    <div style={{backgroundColor:"#cdcdcd"}}><h6>#Colores y enlaces -</h6><hr /></div>
     <Dropdown drop="down">
       <Dropdown.Toggle variant="light" id="dropdown-fondo">
         <h6>🎨 Cambiar color de fondo ⬇</h6>

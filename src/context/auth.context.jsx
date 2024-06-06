@@ -28,6 +28,7 @@ function AuthWrapper(props) {
   const [ isPaciente, setIsPaciente] = useState(false)
   const [listaMensajesNuevos,setListaMensajesNuevos] = useState([])
   const [cantidadMensajesNuevos,setCantidadMensajesNuevos] = useState(0)
+  const [roleControlUsuarios,setRoleControlUsuarios] =useState(null)
 
   //funciones
   const guardarConfiguracion = ()=>{
@@ -65,14 +66,15 @@ function AuthWrapper(props) {
       setLoggedUserImage(response.data.payload.imageUrl)
       setLoggedUserName(response.data.payload.username)
       setIsAuthenticating(false)
-
       if (response.data.payload.role === "admin") {
         setIsAdmin(true)
+        setRoleControlUsuarios("nutri")
       } else {
         setIsAdmin(false)
       }
       if (response.data.payload.role === "nutri") {
         setIsNutri(true)
+        setRoleControlUsuarios("paciente")
       } else {
         setIsNutri(false)
       }
@@ -90,6 +92,7 @@ function AuthWrapper(props) {
       setIsNutri(false)
       setIsPaciente(false)
       setLoggedUserImage(null)
+      setRoleControlUsuarios(null)
     }
   }
 
@@ -120,6 +123,7 @@ function AuthWrapper(props) {
     isNutri,
     isPaciente,
     isAdmin,
+    roleControlUsuarios,
     isDarkTheme,
     setIsDarkTheme,
     backgroundColor,

@@ -8,7 +8,6 @@ function PrivateContent(props) {
     return props.children
   }else{
     return (
-      //alert MUI "contenido privado, necesitas estar registrado para entrar"
       <Navigate to="/login"/>
     )
   }
