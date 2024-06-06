@@ -138,9 +138,11 @@ function AuthWrapper(props) {
   useEffect(() => {
     authenticateUser()
     getNuevosMensajesParaPaciente()
+    reloadInfo()
 
     document.documentElement.style.setProperty('--fondo', backgroundColor);
-    root.style.setProperty("--fondo", backgroundColor);
+    root.style.setProperty("--fondo", backgroundColor);    
+
   }, [backgroundColor])
 
   if (isAuthenticating){

@@ -21,32 +21,24 @@ const ResetPassword = () => {
 
   const handleSendPassword = async (e) => {
     e.preventDefault();
-    setShow(true)
+        
     const passwordToSend = {
       newPassword: password,
     };
 
     try {
-      const resp =  await axios.post(
-        `http://localhost:5005/api/password/reset-password/${params.token}`, passwordToSend);
-        setMensajeRespuesta(resp.message)
+      await axios.post(
+        `http://localhost:5005/api/password/reset-password/${params.token}`, passwordToSend)
+
+        const delay = setTimeout(() => {  
+          setShow(false)
+          navigate("/login")
+        }, 2500)
+      
+          return () => clearTimeout(delay)
     } catch (error) {
-      //navigate("/server-error")
+      navigate("/server-error")
     }
-    /*      <ToastContainer
-          bg="dark"
-          className="p-3"
-          position="bottom-center"
-          style={{ zIndex: 1 }}
-        >
-          <Toast autohide delay={2000}>
-            <Toast.Header closeButton={true} >
-              <strong className="me-auto">Servidor Nutropia</strong>
-              <small>mensaje:</small>
-            </Toast.Header>
-            <Toast.Body>{mensajeRespuesta}</Toast.Body>
-          </Toast>
-        </ToastContainer>*/
   };
   return (
     <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">      
@@ -79,9 +71,11 @@ const ResetPassword = () => {
         </InputGroup>
 
         <Button type="submit" style={{width:"100%"}}> Guardar nueva contraseña </Button>
-        <Alert variant="info" style={{width:"90%"}} show={show}>
-          {mensajeRespuesta}
+
+        <Alert variant="info" style={{width:"100%",alignContent:"center"}} show={show}>
+          Contraseña actualizada
         </Alert>
+        
       </Form>
     </div>
   );

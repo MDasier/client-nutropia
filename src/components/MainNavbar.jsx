@@ -95,8 +95,8 @@ function MainNavbar() {
         </Offcanvas.Header>
         <Offcanvas.Body>       
         <Dropdown.Item as={Link} to="/" onClick={handleClose}> 🏠 Inicio </Dropdown.Item>     
-        <Dropdown.Item as={Link} to="/alimentos" onClick={handleClose}> 🥕 Info alimentos</Dropdown.Item>    
-          
+        <Dropdown.Item as={Link} to="/info" onClick={handleClose}> ℹ️ Uso</Dropdown.Item>    
+        <Dropdown.Item as={Link} to="/alimentos" onClick={handleClose}> 🍱 Dieta</Dropdown.Item>
           {/*isLoggedIn&&<Dropdown.Item as={Link} to="/agenda" onClick={handleClose}> 📅 Agenda</Dropdown.Item>*/}
           {/*isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}> ✉️ Mensajes</Dropdown.Item>*/}
 
@@ -105,6 +105,7 @@ function MainNavbar() {
             <>
               <Dropdown.Item as={Link} to="/agenda" onClick={handleClose}> 📅 Agenda</Dropdown.Item>
               <Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}> ✉️ Mensajes</Dropdown.Item>
+              <Dropdown.Item to="https://leftnutrition.netlify.app" target="_blank" rel="noopener noreferrer" onClick={handleClose}> 🥕 Recetas (Alfa)</Dropdown.Item>              
             </>
             :null
           }
@@ -124,7 +125,7 @@ function MainNavbar() {
       {isLoggedIn&&
       <Dropdown.Item onClick={handleLogout}>🔓 Cerrar sesión </Dropdown.Item>}
 
-    <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de estilos</Dropdown.Item>
+    <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración</Dropdown.Item>
   <div style={{height:"8%",backgroundColor:"#cdcdcd"}}><h6>#Colores y enlaces -</h6><hr /></div>
     <Dropdown drop="down">
       <Dropdown.Toggle variant="light" id="dropdown-fondo">

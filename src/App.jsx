@@ -21,6 +21,7 @@ import ListaMensajes from './pages/ListaMensajes.jsx';
 import ForgetPassword from './pages/auth/ForgetPassword.jsx';
 import ResetPassword from './pages/auth/ResetPassword.jsx';
 import Settings from './pages/Settings.jsx';
+import InfoPage from './pages/InfoPage.jsx';
 
 
 
@@ -32,6 +33,7 @@ function App() {
       <br />
       <Routes>
         <Route path="/" element={<HomePage />}/>
+        <Route path="/info" element={<InfoPage />}/>
         <Route path="/settings" element={<Settings />}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

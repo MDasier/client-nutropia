@@ -24,19 +24,19 @@ const ForgetPassword = () => {
     }
 
     try {
-  //comprobar email en bbdd
 
   //mandar link al email comprobado
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/password/forget-password`, emailToSend)  
       setShow(true)
 
-      const delayBusqueda = setTimeout(() => {  
+      const delay = setTimeout(() => {  
         setShow(false)
+        navigate("/login")
       }, 2500)
     
-        return () => clearTimeout(delayBusqueda)
+        return () => clearTimeout(delay)
     } catch (error) {
-      //navigate("/server-error")
+      navigate("/server-error")
     }
 
   };
@@ -66,9 +66,11 @@ const ForgetPassword = () => {
       </Form.Group>
 
       <Button type="submit"> Comprobar y enviar </Button>
+
       <Alert variant="info" style={{width:"100%",alignContent:"center"}} show={show}>
         Email enviado, puede tardar unos minutos en llegar
       </Alert>
+
     </Form>
     
     </div>

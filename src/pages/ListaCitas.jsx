@@ -78,8 +78,9 @@ function ListaCitas() {
   return (
   <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center" style={{width:"100%"}}>
     <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
-    <Calendar defaultActiveStartDate={new Date()} /*onClickDay={(e)=>handleTest}*/ value={fecha&&fecha}/>
+    <Calendar defaultActiveStartDate={new Date()} /*onClickDay={(e)=>handleTest}*/ value={fecha&&fecha} />
       <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
+        <h6 style={{padding:"20px",backgroundColor:"#dcdcdc",borderRadius:"15px",maxWidth:"95%"}}>Todas las citas:</h6>
         {citas&&
             citas.map((eachCita) => {
               return (<div key={eachCita._id} style={{padding:"20px",backgroundColor:"#dcdcdc",borderRadius:"15px",maxWidth:"95%"}}>

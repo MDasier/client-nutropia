@@ -17,7 +17,7 @@ import maderaOscuraAncha from '../assets/images/maderaOscuraAncha.jpeg'
 
 function HomePage() {
 
-  const { isLoggedIn, loggedUserId, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor,fontWeigth } = useContext(AuthContext)
+  const { isLoggedIn, loggedUserId, isAdmin, isNutri, isPaciente, getNuevosMensajesParaPaciente,cantidadMensajesNuevos,backgroundColor,textColor,fontWeigth } = useContext(AuthContext)
   const [datosUsuarioLogueado,setDatosUsuarioLogueado] = useState(null)
 
   const getLoggedUserData = async()=>{
@@ -25,18 +25,23 @@ function HomePage() {
     setDatosUsuarioLogueado(loggedUserData.data)
   }
   useEffect(() =>{
+    
     if(isLoggedIn){
       getLoggedUserData()
       getNuevosMensajesParaPaciente()
     }else{
       setDatosUsuarioLogueado([])
     }
+
   },[])
 
   if(isLoggedIn&&datosUsuarioLogueado===null){
     return (
       <Spinner animation="border" role="status"></Spinner>
-    );
+    )
+  }
+  if(datosUsuarioLogueado){
+    getNuevosMensajesParaPaciente()
   }
 
   /*
@@ -47,61 +52,62 @@ function HomePage() {
 
   return (
     <div style={{color:textColor,backgroundColor:backgroundColor, fontWeight:fontWeigth}} className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
-      
-  <Carousel className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
 
-      <Carousel.Item>
-      <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
-        <Carousel.Caption>
-          <h3 style={{color:textColor}}>NUTROPIA</h3>
-          <p style={{color:textColor}}>
-            Nuestra aplicación web ha sido diseñada para gestionar tu consulta de nutrición. Entra y descúbrela!
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
 
-      <Carousel.Item>
-      <img src={ensalada} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
-        <Carousel.Caption>
-          <h3 style={{color:textColor}}>Verduras y quinoa</h3>
-          <p style={{color:textColor}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-
-      <Carousel.Item>
-      <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
-        <Carousel.Caption>
-          <h3 style={{color:textColor}}>Tostas</h3>
-          <p style={{color:textColor}}>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-
-      <Carousel.Item>
-      <img src={panIzquierda} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
-        <Carousel.Caption>
-          <h3 style={{color:textColor}}>Sándwiches</h3>
-          <p style={{color:textColor}}>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-
-      <Carousel.Item>
-      <img src={maderaOscuraAncha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.8"}}/>
-        <Carousel.Caption>
-          <h3 style={{color:textColor}}>Ensalada</h3>
-          <p style={{color:textColor}}>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
 
       {/* CONTENIDO PUBLICO */}
       {!isLoggedIn&&
       <div style={{fontWeight:fontWeigth}}>
+          <Carousel className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
+
+            <Carousel.Item>
+            <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+              <Carousel.Caption>
+                <h3 style={{color:textColor}}>NUTROPIA</h3>
+                <p style={{color:textColor}}>
+                  Nuestra aplicación web ha sido diseñada para gestionar tu consulta de nutrición. Entra y descúbrela!
+                </p>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item>
+            <img src={ensalada} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+              <Carousel.Caption>
+                <h3 style={{color:textColor}}>Verduras y quinoa</h3>
+                <p style={{color:textColor}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item>
+            <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+              <Carousel.Caption>
+                <h3 style={{color:textColor}}>Tostas</h3>
+                <p style={{color:textColor}}>
+                  Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                </p>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item>
+            <img src={panIzquierda} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+              <Carousel.Caption>
+                <h3 style={{color:textColor}}>Sándwiches</h3>
+                <p style={{color:textColor}}>
+                  Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                </p>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item>
+            <img src={maderaOscuraAncha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.8"}}/>
+              <Carousel.Caption>
+                <h3 style={{color:textColor}}>Ensalada</h3>
+                <p style={{color:textColor}}>
+                  Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                </p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            </Carousel>
         <p>
           Necesitas registrarte o iniciar sesión para usar la app. Hecha un
           vistazo a unas recetas saludables mientras te lo piensas!{" "}
@@ -111,8 +117,8 @@ function HomePage() {
             rel="noopener noreferrer"
           >
             <br />
-            <span>🥕 RECETAS DE MARINA 🥕</span>
-          </a>
+            <span>Recetas de Marina</span>
+          </a> (En construcción)
         </p>
 
         <h6>
@@ -165,13 +171,24 @@ function HomePage() {
         <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
           {/*<h6>TU PLAN NUTRICIONAL</h6>{/* CARGAR COMPONENTE PLAN NUTRICIONAL }*/}
         </div>
+      </div>
+      :null}
 
-        <div className="d-flex m-2 gap-2 justify-content-center align-items-center flex-wrap">
-          <a href="https://leftnutrition.netlify.app" target="_blank" rel="noopener noreferrer">
-            <span>🥕 RECETAS DE MARINA 🥕</span>
-          </a>
-        </div>
 
+
+
+      {/* admin */}
+      {isAdmin
+      ?<div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">  
+          <h3>Contenido para admin</h3>   
+          <hr />   
+          <Button variant="success" as={Link} to="/control-pacientes" style={{width:"200px"}}>Gestionar pacientes</Button>
+          <hr />
+          <Button variant="success" as={Link} to="/info" style={{width:"200px"}}>Información de la app</Button>
+          <hr />
+          <div>
+            <h6>APP en construcción. En el futuro aquí se mostrarán más opciones</h6>
+          </div>
       </div>
       :null}
     </div>
