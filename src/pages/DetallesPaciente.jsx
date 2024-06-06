@@ -2,10 +2,9 @@
 function DetallesPaciente() {
   return (
     <div>
-        <h6>SE DEBERIAN MOSTRAR TODOS LOS DETALLES DEL PACIENTE</h6>
-        <p>OBJETIVOS</p>
-        <p>DIETA</p>
-        <p>RECOMENDACIONES</p>
+      <h3>DETALLES DEL PACIENTE</h3>
+        <p>OBJETIVOS: NO REGISTRADO EN BASE DE DATOS</p>
+        <p>RECOMENDACIONES: NO TIENES NIGUNA RECOMENDACIÓN TODAVÍA</p>
     </div>
   )
 }

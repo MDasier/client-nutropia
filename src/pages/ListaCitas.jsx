@@ -14,12 +14,7 @@ function ListaCitas() {
   const [consulta, setConsulta] = useState("");
   const [show, setShow] = useState(false);
   const { isNutri, isPaciente } = useContext(AuthContext);
-/*
-  const handleTest = (e) =>{
-    setTest(e.target.value)
-    console.log(test)
-  }
-*/
+
   const handleMarcarRealizada = async (id)=>{
     try {
       await service.patch(`/citas/cita-realizada`,{id:id})
@@ -36,43 +31,43 @@ function ListaCitas() {
       //console.log(error)
   }
   }
+  const buscarCitas = async () => {
+
+    if (isNutri) {
+      const resp = await service.get(`/citas/nutri`);
+      setCitas(resp.data)
+      const arrFechas = [];
+      citas.map((eachCita) => {
+        return arrFechas.push(eachCita.fecha);
+      });
+      const restaFechas = arrFechas.map((fecha) =>
+        Math.abs(new Date(fecha) - new Date())
+      );
+      const iFechaMasCercana = restaFechas.indexOf(Math.min(...restaFechas));
+      setFecha(citas[iFechaMasCercana].fecha); //fecha más cercana a la de 'hoy'
+      const horaArr = citas[iFechaMasCercana].fecha.split("T");
+      const horaExacta = horaArr[1].split(".");
+      setConsulta(horaExacta[0]);
+      
+    } else if (isPaciente) {
+      const resp = await service.get(`/citas/paciente`);
+      setCitas(resp.data);
+      const arrFechas = [];
+      citas.map((eachCita) => {
+        return arrFechas.push(eachCita.fecha);
+      });
+      const restaFechas = arrFechas.map((fecha) =>
+        Math.abs(new Date(fecha) - new Date())
+      );
+      const iFechaMasCercana = restaFechas.indexOf(Math.min(...restaFechas));
+      setFecha(citas[iFechaMasCercana].fecha); //fecha más cercana a la de 'hoy'
+      const horaArr = citas[iFechaMasCercana].fecha.split("T");
+      const horaExacta = horaArr[1].split(".");
+      setConsulta(horaExacta[0]);
+    }
+  }
 
   useEffect(() => {
-    const buscarCitas = async () => {
-
-      if (isNutri) {
-        const resp = await service.get(`/citas/nutri`);
-        setCitas(resp.data)
-        const arrFechas = [];
-        citas.map((eachCita) => {
-          return arrFechas.push(eachCita.fecha);
-        });
-        const restaFechas = arrFechas.map((fecha) =>
-          Math.abs(new Date(fecha) - new Date())
-        );
-        const iFechaMasCercana = restaFechas.indexOf(Math.min(...restaFechas));
-        setFecha(citas[iFechaMasCercana].fecha); //fecha más cercana a la de 'hoy'
-        const horaArr = citas[iFechaMasCercana].fecha.split("T");
-        const horaExacta = horaArr[1].split(".");
-        setConsulta(horaExacta[0]);
-        
-      } else if (isPaciente) {
-        const resp = await service.get(`/citas/paciente`);
-        setCitas(resp.data);
-        const arrFechas = [];
-        citas.map((eachCita) => {
-          return arrFechas.push(eachCita.fecha);
-        });
-        const restaFechas = arrFechas.map((fecha) =>
-          Math.abs(new Date(fecha) - new Date())
-        );
-        const iFechaMasCercana = restaFechas.indexOf(Math.min(...restaFechas));
-        setFecha(citas[iFechaMasCercana].fecha); //fecha más cercana a la de 'hoy'
-        const horaArr = citas[iFechaMasCercana].fecha.split("T");
-        const horaExacta = horaArr[1].split(".");
-        setConsulta(horaExacta[0]);
-      }
-    };
     buscarCitas();
   }, []);
 
@@ -86,15 +81,15 @@ function ListaCitas() {
     <Calendar defaultActiveStartDate={new Date()} /*onClickDay={(e)=>handleTest}*/ value={fecha&&fecha}/>
       <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
         {citas&&
-        citas.map((eachCita) => {
-          return (
-              <div key={eachCita._id} style={{padding:"20px",backgroundColor:"#dcdcdc",borderRadius:"15px",maxWidth:"95%"}}><h4>Cita: {eachCita.fecha}</h4>
-                {eachCita.estado==="pendiente"&&<Button variant="success" onClick={()=>handleMarcarRealizada(eachCita._id)}>Marcar como realizada</Button>}
-                
-              </div>
-          )
-          
-        })}
+            citas.map((eachCita) => {
+              return (<div key={eachCita._id} style={{padding:"20px",backgroundColor:"#dcdcdc",borderRadius:"15px",maxWidth:"95%"}}>
+                      <h4>Cita: {eachCita.fecha}</h4>
+                      {eachCita.estado==="pendiente" &&
+                      <Button variant="success" onClick={()=>handleMarcarRealizada(eachCita._id)}>Marcar como realizada</Button>}
+                    </div> )              
+            })}
+            {citas===null?"No hay citas":"No hay más citas por ahora"}
+        
       </div>
       <Alert variant="info" style={{width:"90%"}} show={show}>
         Cita marcada como realizada

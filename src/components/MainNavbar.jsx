@@ -18,7 +18,7 @@ function MainNavbar() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, setLoggedUserImage, isAdmin, isNutri, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarConfiguracion } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, loggedUserId, setLoggedUserName, loggedUserImage, setLoggedUserImage, isAdmin, isNutri, isPaciente, isDarkTheme, reloadInfo, cantidadMensajesNuevos, getNuevosMensajesParaPaciente,backgroundColor, setBackgroundColor,textColor, setTextColor, guardarConfiguracion } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
@@ -97,8 +97,17 @@ function MainNavbar() {
         <Dropdown.Item as={Link} to="/" onClick={handleClose}> 🏠 Inicio </Dropdown.Item>     
         <Dropdown.Item as={Link} to="/alimentos" onClick={handleClose}> 🥕 Info alimentos</Dropdown.Item>    
           
-          {isLoggedIn&&<Dropdown.Item as={Link} to="/agenda" onClick={handleClose}> 📅 Agenda</Dropdown.Item>}
-          {isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}> ✉️ Mensajes</Dropdown.Item>}
+          {/*isLoggedIn&&<Dropdown.Item as={Link} to="/agenda" onClick={handleClose}> 📅 Agenda</Dropdown.Item>*/}
+          {/*isLoggedIn&&<Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}> ✉️ Mensajes</Dropdown.Item>*/}
+
+          {
+            isLoggedIn&&isNutri || isLoggedIn&&isPaciente?
+            <>
+              <Dropdown.Item as={Link} to="/agenda" onClick={handleClose}> 📅 Agenda</Dropdown.Item>
+              <Dropdown.Item as={Link} to={`/mensajes/${loggedUserId}`} onClick={handleClose}> ✉️ Mensajes</Dropdown.Item>
+            </>
+            :null
+          }
 
         {isNutri ? 
           <><Dropdown.Item as={Link} to="/control-pacientes" onClick={handleClose}> 👥 Control pacientes</Dropdown.Item></>
@@ -116,7 +125,7 @@ function MainNavbar() {
       <Dropdown.Item onClick={handleLogout}>🔓 Cerrar sesión </Dropdown.Item>}
 
     <Dropdown.Item as={Link} to="/settings" onClick={handleClose}>⚙️ Configuración de estilos</Dropdown.Item>
-    <div style={{backgroundColor:"#cdcdcd"}}><h6>#Colores y enlaces -</h6><hr /></div>
+  <div style={{height:"8%",backgroundColor:"#cdcdcd"}}><h6>#Colores y enlaces -</h6><hr /></div>
     <Dropdown drop="down">
       <Dropdown.Toggle variant="light" id="dropdown-fondo">
         <h6>🎨 Cambiar color de fondo ⬇</h6>

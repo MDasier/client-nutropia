@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
 import axios from "axios";
 import Alert from 'react-bootstrap/Alert';
+import service from "../../services/config.services.js";
 
 const ForgetPassword = () => {
 
@@ -26,7 +27,7 @@ const ForgetPassword = () => {
   //comprobar email en bbdd
 
   //mandar link al email comprobado
-      await axios.post(`http://localhost:5005/api/password/forget-password`, emailToSend)  
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/password/forget-password`, emailToSend)  
       setShow(true)
 
       const delayBusqueda = setTimeout(() => {  

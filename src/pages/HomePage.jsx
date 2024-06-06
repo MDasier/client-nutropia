@@ -47,6 +47,7 @@ function HomePage() {
 
   return (
     <div style={{color:textColor,backgroundColor:backgroundColor, fontWeight:fontWeigth}} className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
+      
   <Carousel className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
 
       <Carousel.Item>

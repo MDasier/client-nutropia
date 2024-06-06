@@ -3,7 +3,7 @@ import service from "../services/config.services"
 import { Spinner } from "react-bootstrap"
 
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+//import 'react-calendar/dist/Calendar.css';
 
 function Citas(props) {
     const [citas,setCitas] = useState(null)
@@ -37,7 +37,7 @@ function Citas(props) {
   return (
     <div className="d-flex-c m-2 gap-2 justify-content-center align-items-center flex-wrap">
         
-      <Calendar defaultActiveStartDate={new Date()} /*onChange={setFecha}*/ value={fecha} />
+      <Calendar defaultActiveStartDate={new Date()} /*onChange={setFecha}*/ value={fecha} className="react-calendar"/>
       <p style={{margin:"40px"}}>{consulta===""?"Agenda vacía":"A las "+consulta}</p>
         {/*citas.map((eachCita)=>{
             return <p key={eachCita._id}>{eachCita.fecha}</p>
