@@ -1,102 +1,63 @@
 
 # NUTROPIA 
-
 ## [Abre la app!](https://nutropia.netlify.app)
 
 ![App Logo](https://nutropia.netlify.app/assets/logopeque-DDSpl9Xh.png)
 
 ## Description
+The APP for your nutrition consultation. Manage medical appointments, messages and patient lists quickly and easily.
 
-**NOTE -** Describe your project in one/two lines.
 #### [Client](https://github.com/MDasier/client-nutropia)
 #### [Server](https://github.com/MDasier/server-nutropia)
 
 ## Technologies & Libraries used
 
-**NOTE -** List here all technologies used in the project like HTML, CSS, Javascript, React, axios, React Context, Bootstrap, React-Calendar.
+HTML, CSS, Javascript, React, Axios, React Context, Bootstrap, React-Calendar, Cloudinary, Nodemailer, MondoDB, Express, Node, Mongoose...
 
 ## Backlog Functionalities
 
-**NOTE -** List here all functionalities you wish to add to your proyect later or you are currently working on
+Future tech-funcionability: Implement 'Socket.io' for instant messages.
 
 # Client Structure
-
 ## User Stories
+- NotFound - 'Tipical 404 - Page not found' 
+- HomePage - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
+- Signup - As a user I want to sign up on the webpage so that I can see all the events that I could attend
+- Login - As a user I want to be able to log in on the webpage so that I can get back to my account
+- Logout - As a user I want to be able to log out from the webpage so that I can make sure no one will access my account
+- InfoPage - As a user I want to be able to know about the app
 
-**NOTE -**  List here all the actions a user can do in the app. Example:
 
-- **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault 
-- **500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
-- **homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
-- **sign up** - As a user I want to sign up on the webpage so that I can see all the events that I could attend
-- **login** - As a user I want to be able to log in on the webpage so that I can get back to my account
-- **logout** - As a user I want to be able to log out from the webpage so that I can make sure no one will access my account
-- **events list** - As a user I want to see all the events available so that I can choose which ones I want to attend
-- **events create** - As a user I want to create an event so that I can invite others to attend
 
 ## Client Routes
-
-**NOTE -** Use below table to list your frontend routes
-
 ## React Router Routes (React App)
-| Path                      | Page            | Components        | Permissions              | Behavior                                                      |
-| ------------------------- | ----------------| ----------------  | ------------------------ | ------------------------------------------------------------  |
-| `/`                       | Home            |                   | public                   | Home page                                                     |
-| `/signup`                 | Signup          |                   | anon only `<IsAnon>`     | Signup form, link to login, navigate to homepage after signup |
-| `/login`                  | Login           |                   | anon only `<IsAnon>`     | Login form, link to signup, navigate to homepage after login  |
-| `/profile`                | Profile         | EditProfile       | user only `<IsPrivate>`  | Navigate to homepage after logout, expire session             |
-| `/games/list`             | GameList        | AddGame, GameCard | user only `<IsPrivate>`  | Shows all films on backlog                                    |
-| `/games/edit`             | GamesEdit       |                   | user only `<IsPrivate>`  | Shows all games on backlog                                    |
-| `/games/favourites`       | FavouriteList   | GameCard          | user only `<IsPrivate>`  | Shows all games on backlog                                    |
 
-## Other Components
+| Path                        | Page               |  Permissions                          | Behavior                                                      |
+| --------------------------- | -------------------| ------------------------------------  | ------------------------------------------------------------  |
+| `/`                         | Home               |  public                               | Home page                                                     |
+| `/signup`                   | Signup             |  public                               | Signup form                                                   |
+| `/login`                    | Login              |  public                               | Login form                                                    |
+| `/perfil/:userId`           | Profile            |  user only                            | Navigate to login after logout, expire session                |
+| `/info`                     | Info               |  public                               | Shows info page                                               |
+| `/forget`                   | ForgetPassword     |                                       | Form for get an email to reset password                       |
+| `/reset-password/:token`    | ResetPassword      |  user only                            | Form for reset password                                       |
+| `/alimentos`                | ListaAlimentos     |  public                               | Serach foods for make diets                                   |
+| `/control-pacientes`        | ListaUsuarios      |  Admin or Nutricionistas access only  | List of users to manage premissions                           |
+| `/agenda`                   | Citas              |  Nutricionistas or Pacientes          | Shows all dates                                               |
+| `/nueva-cita/:pacienteId`   | CrearCita          |  Nutricionistas only                  | Create date                                                   |
+| `/mensajes/:id`             | ListaMensajes      |  Pacientes only                       | List of messages                                              |
+| `/nuevo-mensaje/:pacienteId`| CrearMensaje       |  Nutricionistas only                  | Create messages                                               |
+| `/pacientes/:pacienteId`    | DetallesPaciente   |  Nutricionistas only                  | Shows all details from a patient                              |
+| `/*`                        | NotFound           |  public                               | Shows Not found page while an error occurs                    |
 
-- Navbar
-- Footer
 
-## Services
-
-- Auth Service
-  - auth.login(user)
-  - auth.signup(user)
-  - auth.verify()
-
-- Backlog Service
-  - game.filter(type, status)
-  - game.detail(id)
-  - game.add(id)
-  - game.delete(id)
-  - game.update(id)
-  
-- External API
-  - gameApi.details
-  - gameApi.list
   
 ## Context
-
-- auth.context
-- theme.context
+- auth.context (All info from a logged user)
   
-## Links
-
-### Collaborators
-
-[Developer 1 name](www.github-url.com)
-
-[Developer 2 name](www.github-url.com)
-
 ### Project
-
-[Repository Link Client](www.your-github-url-here.com)
-
-[Repository Link Server](www.your-github-url-here.com)
-
-[Deploy Link](www.your-deploy-url-here.com)
-
-### Trello
-
-[Link to your trello board](www.your-trello-url-here.com)
+[Repository Link Client](https://github.com/MDasier/client-nutropia)
+[Repository Link Server](https://github.com/MDasier/server-nutropia)
 
 ### Slides
-
-[Slides Link](www.your-slides-url-here.com)
+[Slides Link](https://docs.google.com/presentation/d/1Bet4KJOQ9EM7SXLSm5I0N1cHcoJFe-wz4bcz9D3E3Ng/edit?usp=sharing)
