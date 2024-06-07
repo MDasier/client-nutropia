@@ -25,7 +25,7 @@ function HomePage() {
 
   useEffect(() =>{
 
-    reloadInfo()
+    //reloadInfo()
 
     if(isLoggedIn){      
       getLoggedUserData()
@@ -41,10 +41,11 @@ function HomePage() {
       <Spinner animation="border" role="status"></Spinner>
     )
   }
+  /*
   if(datosUsuarioLogueado!==null){
-    getNuevosMensajesParaPaciente()
+    //getNuevosMensajesParaPaciente()//!Comprobar mensajes continuamente por falta de socket.io
   }
-
+*/
   /*
   PARA LAS IMAGENES PODRIAMOS USAR 'npm i react-image-holder' Y PONER HOLDER.JS MIENTRAS CARGAN LAS IMAGENES REALES
   */
