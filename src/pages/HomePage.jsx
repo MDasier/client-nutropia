@@ -8,10 +8,10 @@ import Citas from "../components/Citas";
 //galeria de fotos de prueba
 import Carousel from 'react-bootstrap/Carousel';
 //import logopeque from '../assets/images/logopeque.png'
-import ensalada from '../assets/images/ensalada.jpeg'
-import panDerecha from '../assets/images/panDerecha.jpeg'
-import panIzquierda from '../assets/images/panIzquierda.jpeg'
-import maderaOscuraAncha from '../assets/images/maderaOscuraAncha.jpeg'
+import champis from '../assets/images/champis.jpeg'
+import carbonara from '../assets/images/carbonara.jpeg'
+import muffins from '../assets/images/muffins.jpeg'
+import ramen from '../assets/images/ramen.jpeg'
 
 function HomePage() {
 
@@ -61,49 +61,47 @@ function HomePage() {
           <Carousel className="d-flex-c m-2 gap-2 justify-content-center align-items-center">
 
             <Carousel.Item>
-            <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+            <a href="https://www.instagram.com/p/CTWvkZrIkAW/" target="_blank">
+            <img src={ramen} alt="ramen" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+            </a>
               <Carousel.Caption>
-                <h3 style={{color:textColor}}>NUTROPIA</h3>
+                <h3 style={{color:textColor}}>RAMEN FÁCIL</h3>
                 <p style={{color:textColor}}>
-                  Nuestra aplicación web ha sido diseñada para gestionar tu consulta de nutrición. Entra y descúbrela!
+                RAMEN FÁCIL CON FIDEOS DE ARROZ - SIN GLUTEN!
                 </p>
               </Carousel.Caption>
             </Carousel.Item>
 
             <Carousel.Item>
-            <img src={ensalada} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+            <a href="https://www.instagram.com/p/Crn4q9ZIcZh/" target="_blank">
+            <img src={carbonara} alt="carbonara" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+            </a>
               <Carousel.Caption>
-                <h3 style={{color:textColor}}>Verduras y quinoa</h3>
-                <p style={{color:textColor}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3 style={{color:textColor}}>CARBONARA</h3>
+                <p style={{color:textColor}}>PASTA DE TRIGO SARRACENO CON SALSA CARBONARA.</p>
               </Carousel.Caption>
             </Carousel.Item>
 
             <Carousel.Item>
-            <img src={panDerecha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+            <a href="https://www.instagram.com/p/CjfITM3IjBf/" target="_blank">
+              <img src={champis} alt="champis" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}} />
+            </a>
               <Carousel.Caption>
-                <h3 style={{color:textColor}}>Tostas</h3>
+                <h3 style={{color:textColor}}>TXAMPIS</h3>
                 <p style={{color:textColor}}>
-                  Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                  CHAMPIÑONES RELLENOS DE SOBRASADA.
                 </p>
               </Carousel.Caption>
             </Carousel.Item>
 
             <Carousel.Item>
-            <img src={panIzquierda} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+            <a href="https://www.instagram.com/p/CVIzrpwI-96/" target="_blank">
+            <img src={muffins} alt="muffins" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.6"}}/>
+            </a>
               <Carousel.Caption>
-                <h3 style={{color:textColor}}>Sándwiches</h3>
+                <h3 style={{color:textColor}}>Muffins de calabaza y cacahuete</h3>
                 <p style={{color:textColor}}>
-                  Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-
-            <Carousel.Item>
-            <img src={maderaOscuraAncha} alt="imgPrueba" width={"100%"} style={{maxWidth:"800px",borderRadius:"15px",opacity:"0.8"}}/>
-              <Carousel.Caption>
-                <h3 style={{color:textColor}}>Ensalada</h3>
-                <p style={{color:textColor}}>
-                  Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                MUFFINS DE CALABAZA Y CACAHUETE, CUBIERTOS DE CHOCOLATE Y COCO.
                 </p>
               </Carousel.Caption>
             </Carousel.Item>
